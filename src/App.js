@@ -5,7 +5,7 @@ import blurImage from "./white-blur.jpg"
 
 
 const shiftTransition ={
-    transition: 'bottom .75s',
+    transition: 'bottom 2s',
     position: 'relative',
     bottom: 0
 };
@@ -54,7 +54,9 @@ const styles = StyleSheet.create({
     title: {
         'text-align': 'center',
         'padding-top': '25vh',
-        'width': '65vw'
+        'width': '65vw',
+        position: 'absolute',
+        zIndex: '4'
     },
     lobster: {
         'font-family': 'Lobster',
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
         bottom: 0
     }, shiftTransition),
     overlay:{
+        zIndex: '3',
         backgroundColor: '#fff',
         position: 'absolute',
         top: 0,
@@ -92,7 +95,10 @@ const styles = StyleSheet.create({
         height: '100%',
         opacity: '.3'
     },
-    fading: {
+    overlayHidden:{
+        visibility: 'hidden'
+    },
+    shiftOut: {
         bottom: 900
     }
 });
@@ -131,13 +137,13 @@ class App extends React.Component {
         return (
             <article className={this.state.entered ? css(styles.glass, styles.fade) : css(styles.glass)}>
                 <div className={css(styles.title)}>
-                    <h1 className={this.state.entered ? css(styles.lobster, styles.h1, styles.fading) : css(styles.lobster, styles.h1)}>My Library</h1>
+                    <h1 className={this.state.entered ? css(styles.lobster, styles.h1, styles.shiftOut) : css(styles.lobster, styles.h1)}>My Library</h1>
                     <div className={css(styles.enterButton)}>
-                        <a className={this.state.entered ? css(styles.enterLabel, styles.fading) : css(styles.enterLabel)} onClick={enter.bind(this)}>Enter</a>
-                        <hr className={this.state.entered ? css(styles.rule, styles.fading) : css(styles.rule)}/>
+                        <a className={this.state.entered ? css(styles.enterLabel, styles.shiftOut) : css(styles.enterLabel)} onClick={enter.bind(this)}>Enter</a>
+                        <hr className={this.state.entered ? css(styles.rule, styles.shiftOut) : css(styles.rule)}/>
                     </div>
                 </div>
-                <div className={this.state.entered ? css(styles.overlay) : ' '}></div>
+                <div className={this.state.entered ? css(styles.overlay) : css(styles.overlay)}></div>
                 {/*status: {(this.state.entered) ? 'entered':'not'}*/}
             </article>
         )
