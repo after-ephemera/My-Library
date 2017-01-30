@@ -4,6 +4,11 @@ import Rx from "rxjs";
 import blurImage from "./white-blur.jpg"
 
 
+const shiftTransition ={
+    transition: 'bottom .75s',
+    position: 'relative',
+    bottom: 0
+};
 
 const styles = StyleSheet.create({
     glass: {
@@ -63,24 +68,21 @@ const styles = StyleSheet.create({
             'opacity': '.75'
         }
     },
-    enterLabel: {
+    enterLabel: Object.assign({
         'font-family': 'Work Sans',
         'font-weight': '200',
         'font-size': '24px',
-        transition: '1s ease',
-        opacity: 1
-    },
-    h1:{
+    }, shiftTransition),
+    h1:Object.assign({
         'font-size': 64,
-        'letter-spacing': 1.5,
-        transition: '1s ease',
-        opacity: 1
-    },
-    rule: {
+        'letter-spacing': 1.5
+    }, shiftTransition),
+    rule: Object.assign({
         width: 55,
-        transition: '1s ease',
-        opacity: 1
-    },
+        transition: 'bottom .75s',
+        position: 'relative',
+        bottom: 0
+    }, shiftTransition),
     overlay:{
         backgroundColor: '#fff',
         position: 'absolute',
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
         opacity: '.3'
     },
     fading: {
-        opacity: 0
+        bottom: 900
     }
 });
 
@@ -128,11 +130,11 @@ class App extends React.Component {
 
         return (
             <article className={this.state.entered ? css(styles.glass, styles.fade) : css(styles.glass)}>
-                <div className={this.state.entered ? css(styles.title, styles.fading) : css(styles.title)}>
-                    <h1 className={css(styles.lobster, styles.h1)}>My Library</h1>
+                <div className={css(styles.title)}>
+                    <h1 className={this.state.entered ? css(styles.lobster, styles.h1, styles.fading) : css(styles.lobster, styles.h1)}>My Library</h1>
                     <div className={css(styles.enterButton)}>
-                        <a className={css(styles.enterLabel)} onClick={enter.bind(this)}>Enter</a>
-                        <hr className={css(styles.rule)}/>
+                        <a className={this.state.entered ? css(styles.enterLabel, styles.fading) : css(styles.enterLabel)} onClick={enter.bind(this)}>Enter</a>
+                        <hr className={this.state.entered ? css(styles.rule, styles.fading) : css(styles.rule)}/>
                     </div>
                 </div>
                 <div className={this.state.entered ? css(styles.overlay) : ' '}></div>
