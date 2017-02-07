@@ -1,19 +1,22 @@
 import React from "react";
 import {StyleSheet, css} from "aphrodite";
 import Rx from "rxjs";
-import blurImage from "./white-blur.jpg"
+import blurImage from "./white-blur.jpg";
+import Library from './Library/Library';
 
 
 const shiftTransition ={
-    transition: 'bottom 2s',
+    transition: 'all 1s ease-out',
     position: 'relative',
-    bottom: 0
+    bottom: 0,
+    top: 0,
+    opacity: 1
 };
 
 const styles = StyleSheet.create({
     glass: {
         position: 'relative',
-        'animation-duration': '.25s',
+        'animation-duration': '.75s',
         'animation-fill-mode': 'both',
         'background-size': 'cover',
         overflow: 'hidden',
@@ -56,12 +59,13 @@ const styles = StyleSheet.create({
         'padding-top': '25vh',
         'width': '65vw',
         position: 'absolute',
-        zIndex: '4'
+        zIndex: '4',
+        top: 0
     },
     lobster: {
         'font-family': 'Lobster',
     },
-    enterButton:{
+    enterButton:Object.assign({
         width: 75,
         margin: 'auto',
         ':hover':{
@@ -69,11 +73,12 @@ const styles = StyleSheet.create({
             // 'background-color': 'black',
             'opacity': '.75'
         }
-    },
+    }, shiftTransition),
     enterLabel: Object.assign({
         'font-family': 'Work Sans',
         'font-weight': '200',
         'font-size': '24px',
+        cursor: 'pointer'
     }, shiftTransition),
     h1:Object.assign({
         'font-size': 64,
@@ -81,9 +86,6 @@ const styles = StyleSheet.create({
     }, shiftTransition),
     rule: Object.assign({
         width: 55,
-        transition: 'bottom .75s',
-        position: 'relative',
-        bottom: 0
     }, shiftTransition),
     overlay:{
         zIndex: '3',
@@ -95,19 +97,28 @@ const styles = StyleSheet.create({
         height: '100%',
         opacity: '.3'
     },
-    overlayHidden:{
-        visibility: 'hidden'
-    },
     shiftOut: {
-        bottom: 900
+        // bottom: 900
+        top: '-65vh',
+        opacity: 0
+    },
+    abs:{
+        width: '100%',
+        height: '100%'
+    },
+    hide:{
+        display: 'none'
     }
+
 });
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            entered: false
+            entered: false,
+            isLoggedIn: false,
+            hideTitle:false
         };
         // HTTP Request test.
         Rx.Observable.ajax({url:`http://openlibrary.org/search.json?q=the+lord+of+the+rings`,crossDomain: true})
@@ -121,31 +132,44 @@ class App extends React.Component {
     }
 
     update(e) {
-        let newState = {txt: e.target.value, entered: !this.state.entered};
+        let newState = {
+            txt: e.target.value, entered: !this.state.entered,
+            isLoggedIn:true
+        };
         console.log('New state: ', newState);
         this.setState(newState);
 
     }
 
+    enter = ()=>{
+        console.log('Entering the app!');
+        this.setState({
+            entered: !this.state.entered,
+            isLoggedIn:true
+        });
+        setTimeout(()=>{
+            this.setState({hideTitle:true})
+        }, 1000)
+    };
+
     render() {
 
-        let enter = ()=>{
-            console.log('Entering the app!');
-            this.setState({entered: !this.state.entered});
-        };
-
         return (
-            <article className={this.state.entered ? css(styles.glass, styles.fade) : css(styles.glass)}>
-                <div className={css(styles.title)}>
+            <div className={css(styles.abs)}>
+                <article className={this.state.entered ? css(styles.glass, styles.fade) : css(styles.glass)}>
+                    <div className={this.state.entered ? css(styles.overlay) : ''}></div>
+                    {/*status: {(this.state.entered) ? 'entered':'not'}*/}
+                </article>
+
+                <div className={this.state.hideTitle ? css(styles.title, styles.hide):css(styles.title)}>
                     <h1 className={this.state.entered ? css(styles.lobster, styles.h1, styles.shiftOut) : css(styles.lobster, styles.h1)}>My Library</h1>
-                    <div className={css(styles.enterButton)}>
-                        <a className={this.state.entered ? css(styles.enterLabel, styles.shiftOut) : css(styles.enterLabel)} onClick={enter.bind(this)}>Enter</a>
-                        <hr className={this.state.entered ? css(styles.rule, styles.shiftOut) : css(styles.rule)}/>
+                    <div className={this.state.entered ? css(styles.enterButton, styles.shiftOut) : css(styles.enterButton)}>
+                        <a className={css(styles.enterLabel)} onClick={this.enter.bind(this)}>Enter</a>
+                        <hr className={css(styles.rule)}/>
                     </div>
                 </div>
-                <div className={this.state.entered ? css(styles.overlay) : css(styles.overlay)}></div>
-                {/*status: {(this.state.entered) ? 'entered':'not'}*/}
-            </article>
+                <Library isLoggedIn={this.state.isLoggedIn}/>
+            </div>
         )
     }
 }

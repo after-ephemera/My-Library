@@ -30,7 +30,7 @@ body{
   color: #172a3c
 }
 
-html, body, article, #root {
+html, body, .mainDiv, article, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
