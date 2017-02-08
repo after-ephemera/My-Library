@@ -11,7 +11,12 @@ const styles = StyleSheet.create({
         position: 'absolute',
         // bottom: 0,
         top: '100vh',
-        opacity: '0'
+        opacity: '0',
+        zIndex: 20
+    },
+    library:{
+        position:'absolute',
+        top:0
     },
     shiftIn: {
         // bottom: 900
@@ -52,11 +57,14 @@ class Library extends React.Component{
     ];
 
     render(){
-        return <div>
+        return <div
+            className={this.props.isLoggedIn ?
+                css(styles.libraryWrapper, styles.shiftIn) :
+                css(styles.libraryWrapper)}>
             {/*{this.props.isLoggedIn ? "L" : "Not l"}ogged in.*/}
             <CardRow title="Featured" books={this.books} isLoggedIn={this.props.isLoggedIn}/>
-            {/*<CardRow title="New York Times Top List" books={this.books} isLoggedIn={this.props.isLoggedIn}/>*/}
-            {/*<CardRow title="Books your friends like" books={this.books} isLoggedIn={this.props.isLoggedIn}/>*/}
+            <CardRow title="New York Times Top List" books={this.books} isLoggedIn={this.props.isLoggedIn}/>
+            <CardRow title="Books your friends like" books={this.books} isLoggedIn={this.props.isLoggedIn}/>
         </div>
     }
 }
@@ -68,21 +76,18 @@ const bookStyles = StyleSheet.create({
        minWidth: 150,
        maxWidth: 150,
        height: 240,
-       backgroundColor: 'silver',
+       backgroundColor: '#ddd',
        margin: 4
    }
 });
 
 let CardRow = (props) =>(
-    <div
-        className={props.isLoggedIn ?
-            css(styles.libraryWrapper, styles.shiftIn) :
-            css(styles.libraryWrapper)}>
+    <section>
         {props.title}
         <div className={css(styles.bookRow)}>
             {props.books.map(book => <BookCard key={book.key} book={book.title}/>)}
         </div>
-    </div>
+    </section>
 );
 
 let BookCard = (props) => (

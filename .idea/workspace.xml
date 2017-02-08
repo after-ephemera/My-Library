@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c2a1675-3cde-4edb-8e32-209e9b5a6e49" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Library/Library.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/App.css" afterPath="$PROJECT_DIR$/public/App.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Library/Library.js" afterPath="$PROJECT_DIR$/src/Library/Library.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -47,8 +44,8 @@
       <file leaf-file-name="Library.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Library/Library.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="57" column="53" lean-forward="false" selection-start-line="57" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
+            <state relative-caret-position="592">
+              <caret line="78" column="29" lean-forward="false" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -96,6 +93,7 @@
       <find>article</find>
       <find>right'</find>
       <find>enter</find>
+      <find>silver</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -339,12 +337,12 @@
       <workItem from="1486142062825" duration="642000" />
       <workItem from="1486402657089" duration="736000" />
       <workItem from="1486420062028" duration="1467000" />
-      <workItem from="1486433156544" duration="5481000" />
+      <workItem from="1486433156544" duration="6734000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30201000" />
+    <option name="totallyTimeSpent" value="31454000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -697,8 +695,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Library/Library.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="57" column="53" lean-forward="false" selection-start-line="57" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
+        <state relative-caret-position="592">
+          <caret line="78" column="29" lean-forward="false" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
           <folding />
         </state>
       </provider>
