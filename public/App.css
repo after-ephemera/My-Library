@@ -14,20 +14,15 @@
   color: white;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+*{
+  font-family: Work Sans;
 }
 
 body{
   background-image: url('white.jpg');
   background-size: cover;
   background-position: right;
-  color: #172a3c
+  color: #172a3c;
 }
 
 html, body, .mainDiv, article, #root {

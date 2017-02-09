@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         // bottom: 0,
         top: '100vh',
         opacity: '0',
-        zIndex: 20
+        zIndex: 20,
+        overflow: 'scroll'
     },
     library:{
         position:'absolute',
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         // justifyContent: 'center',
         // flexDirection: 'row',
-        // flexWrap: 'noWrap',
+        flexWrap: 'noWrap',
         overflowX: 'scroll'
     }
 });
@@ -50,7 +51,7 @@ class Library extends React.Component{
 
     books = [
         {
-            title: 'The Hiitchiker\'s Guide to the Galaxy',
+            title: 'The Hitchiker\'s Guide to the Galaxy',
             coverThumb: '',
             key: 0
         },
@@ -65,7 +66,7 @@ class Library extends React.Component{
             key:2
         },
         {
-            title: 'The Hiitchiker\'s Guide to the Galaxy',
+            title: 'The Hitchiker\'s Guide to the Galaxy',
             coverThumb: '',
             key: 3
         },
@@ -80,7 +81,7 @@ class Library extends React.Component{
             key:5
         },
         {
-            title: 'The Hiitchiker\'s Guide to the Galaxy',
+            title: 'The Hitchiker\'s Guide to the Galaxy',
             coverThumb: '',
             key: 6
         },
@@ -95,7 +96,7 @@ class Library extends React.Component{
             key:8
         },
         {
-            title: 'The Hiitchiker\'s Guide to the Galaxy',
+            title: 'The Hitchiker\'s Guide to the Galaxy',
             coverThumb: '',
             key: 9}
             ,
@@ -110,7 +111,7 @@ class Library extends React.Component{
             key:11
         },
         {
-            title: 'The Hiitchiker\'s Guide to the Galaxy',
+            title: 'The Hitchiker\'s Guide to the Galaxy',
             coverThumb: '',
             key: 13
         },
@@ -126,6 +127,7 @@ class Library extends React.Component{
         }
     ];
 
+    // books1=this.books;
     books1 = shuffleArray(this.books.slice());
     books2 = shuffleArray(this.books.slice());
     books3 = shuffleArray(this.books.slice());
@@ -136,9 +138,9 @@ class Library extends React.Component{
                 css(styles.libraryWrapper, styles.shiftIn) :
                 css(styles.libraryWrapper)}>
             {/*{this.props.isLoggedIn ? "L" : "Not l"}ogged in.*/}
-            <CardRow title="Featured" books={shuffleArray(this.books1)} isLoggedIn={this.props.isLoggedIn}/>
-            <CardRow title="New York Times Top List" books={shuffleArray(this.books2)} isLoggedIn={this.props.isLoggedIn}/>
-            <CardRow title="Books your friends like" books={shuffleArray(this.books3)} isLoggedIn={this.props.isLoggedIn}/>
+            <CardRow title="Featured" books={this.books1} isLoggedIn={this.props.isLoggedIn}/>
+            {/*<CardRow title="New York Times Top List" books={shuffleArray(this.books2)} isLoggedIn={this.props.isLoggedIn}/>*/}
+            {/*<CardRow title="Books your friends like" books={shuffleArray(this.books3)} isLoggedIn={this.props.isLoggedIn}/>*/}
         </div>
     }
 }
@@ -146,18 +148,33 @@ class Library extends React.Component{
 export default Library;
 
 const bookStyles = StyleSheet.create({
-   wrapper:{
-       minWidth: 150,
-       maxWidth: 150,
-       minHeight: 240,
-       backgroundColor: '#ddd',
-       margin: 4
-   }
+    wrapper:{
+        minWidth: 150,
+        maxWidth: 150,
+        minHeight: 240,
+        backgroundColor: '#ddd',
+        margin: 4,
+        ':hover':{
+            backgroundColor: '#bbb'
+        }
+    },
+    imageWrapper:{
+        minWidth: 150,
+        maxWidth: 150,
+        minHeight: 230,
+    },
+    thumbnail:{
+        width: 140,
+        margin: 5
+    },
+    title:{
+        float:'bottom'
+    }
 });
 
 let CardRow = (props) =>(
     <section>
-        {props.title}
+        <h1>{props.title}</h1>
         <div className={css(styles.bookRow)}>
             {props.books.map(book => <BookCard key={book.key} book={book}/>)}
         </div>
@@ -166,7 +183,11 @@ let CardRow = (props) =>(
 
 let BookCard = (props) => (
     <div className={css(bookStyles.wrapper)}>
-        <img src={props.book.coverThumb} alt={props.book.title}/>
-        {props.book.title}
+        <div className={css(bookStyles.imageWrapper)}>
+            <img className={css(bookStyles.thumbnail)}
+                 src={props.book.coverThumb || 'http://vignette3.wikia.nocookie.net/vocaloid/images/6/6a/Book_placeholder.png/revision/latest?cb=20140717130031'}
+                 alt={props.book.title}/>
+        </div>
+        <span className={css(bookStyles.title)}>{props.book.title}</span>
     </div>
 );
