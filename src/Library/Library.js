@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, css} from "aphrodite";
+import books from './books.data';
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -21,9 +22,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         // bottom: 0,
         top: '100vh',
-        opacity: '0',
         zIndex: 20,
-        overflow: 'scroll'
+        overflow: 'scroll',
+        opacity: '0'
     },
     library:{
         position:'absolute',
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     shiftIn: {
         // bottom: 900
         top: 0,
-        opacity: '.6'
+        opacity: '1'
     },
     bookRow:{
         width: '100%',
@@ -49,83 +50,8 @@ class Library extends React.Component{
         super();
     }
 
-    books = [
-        {
-            title: 'The Hitchiker\'s Guide to the Galaxy',
-            coverThumb: '',
-            key: 0
-        },
-        {
-            title: 'Lord of the Rings',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/583487-M.jpg',
-            key: 1
-        },
-        {
-            title: 'The Book of Mormon',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/146516-M.jpg',
-            key:2
-        },
-        {
-            title: 'The Hitchiker\'s Guide to the Galaxy',
-            coverThumb: '',
-            key: 3
-        },
-        {
-            title: 'Lord of the Rings',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/583487-M.jpg',
-            key: 4
-        },
-        {
-            title: 'The Book of Mormon',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/146516-M.jpg',
-            key:5
-        },
-        {
-            title: 'The Hitchiker\'s Guide to the Galaxy',
-            coverThumb: '',
-            key: 6
-        },
-        {
-            title: 'Lord of the Rings',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/583487-M.jpg',
-            key: 7
-        },
-        {
-            title: 'The Book of Mormon',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/146516-M.jpg',
-            key:8
-        },
-        {
-            title: 'The Hitchiker\'s Guide to the Galaxy',
-            coverThumb: '',
-            key: 9}
-            ,
-        {
-            title: 'Lord of the Rings',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/583487-M.jpg',
-            key: 10
-        },
-        {
-            title: 'The Book of Mormon',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/146516-M.jpg',
-            key:11
-        },
-        {
-            title: 'The Hitchiker\'s Guide to the Galaxy',
-            coverThumb: '',
-            key: 13
-        },
-        {
-            title: 'Lord of the Rings',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/583487-M.jpg',
-            key: 14
-        },
-        {
-            title: 'The Book of Mormon',
-            coverThumb: 'http://covers.openlibrary.org/b/ID/146516-M.jpg',
-            key:15
-        }
-    ];
+    // Dummy data
+    books = books;
 
     // books1=this.books;
     books1 = shuffleArray(this.books.slice());
@@ -152,23 +78,31 @@ const bookStyles = StyleSheet.create({
         minWidth: 150,
         maxWidth: 150,
         minHeight: 240,
-        backgroundColor: '#ddd',
         margin: 4,
-        ':hover':{
-            backgroundColor: '#bbb'
-        }
+        // backgroundColor: '#eee',
+        borderRadius: 8,
+        // opacity: '.6',
     },
     imageWrapper:{
         minWidth: 150,
         maxWidth: 150,
-        minHeight: 230,
+        minHeight: 230
     },
     thumbnail:{
         width: 140,
-        margin: 5
+        margin: 5,
+        ':after': {
+            opacity: 1
+        },
+        ':hover':{
+            // backgroundColor: '#bbb',
+            filter: 'drop-shadow(8px 8px 10px #bbb)'
+        },
     },
     title:{
-        float:'bottom'
+        float:'bottom',
+        fontSize: 14,
+        margin: 5
     }
 });
 
