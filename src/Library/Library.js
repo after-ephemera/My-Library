@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, css} from "aphrodite";
 import books from './books.data';
-import {truncateTitle} from '../utils/utils';
+import {truncateStringByWord} from '../utils/utils';
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -56,7 +56,7 @@ class Library extends React.Component{
         super();
 
         for(let book of books){
-            book.title = truncateTitle(book.title, 24, true);
+            book.title = truncateStringByWord(book.title, 24, true);
         }
     }
 

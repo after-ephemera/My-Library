@@ -6,7 +6,7 @@
  * on the offending word. If the first word is longer than the maxLength
  * specified, it is cut off at the maxLength.
  */
-export function truncateTitle(title, maxLength, ellipses){
+export function truncateStringByWord(title, maxLength, ellipses){
     if(title.length < maxLength) return title;
 
     // Get the list of words so we can determine how many to keep.
