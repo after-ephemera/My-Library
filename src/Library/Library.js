@@ -70,7 +70,6 @@ class Library extends React.Component{
             className={this.props.isLoggedIn ?
                 css(styles.libraryWrapper, styles.shiftIn) :
                 css(styles.libraryWrapper)}>
-            {/*{this.props.isLoggedIn ? "L" : "Not l"}ogged in.*/}
             <CardRow title="Featured" books={this.books1} isLoggedIn={this.props.isLoggedIn}/>
             {/*<CardRow title="New York Times Top List" books={shuffleArray(this.books2)} isLoggedIn={this.props.isLoggedIn}/>*/}
             {/*<CardRow title="Books your friends like" books={shuffleArray(this.books3)} isLoggedIn={this.props.isLoggedIn}/>*/}
@@ -101,6 +100,8 @@ const bookStyles = StyleSheet.create({
         ':after': {
             opacity: 1
         },
+    },
+    hoverZoom:{
         ':hover':{
             filter: 'drop-shadow(8px 8px 10px #bbb)',
             transform: 'scale(1.05,1.05)'
@@ -125,7 +126,7 @@ let CardRow = (props) =>(
 let BookCard = (props) => (
     <div className={css(bookStyles.wrapper)}>
         <div className={css(bookStyles.imageWrapper)}>
-            <img className={css(bookStyles.thumbnail)}
+            <img className={props.book.coverThumb ? css(bookStyles.thumbnail, bookStyles.hoverZoom) : css(bookStyles.thumbnail)}
                  src={props.book.coverThumb || 'http://vignette3.wikia.nocookie.net/vocaloid/images/6/6a/Book_placeholder.png/revision/latest?cb=20140717130031'}
                  alt={props.book.title}/>
         </div>

@@ -15,4 +15,5 @@ build
 npm-debug.log
 
 #Jetbrains
-.idea/*
+.idea/workspace.xml
+.idea/tasks.xml
