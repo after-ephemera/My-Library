@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, css} from "aphrodite";
 import books from './books.data';
+import {truncateTitle} from '../utils/utils';
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -41,17 +42,23 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
         // flexDirection: 'row',
         flexWrap: 'noWrap',
+        justifyContent: 'space-around',
         overflowX: 'scroll'
     }
 });
 
 class Library extends React.Component{
-    constructor(){
-        super();
-    }
 
     // Dummy data
     books = books;
+
+    constructor(){
+        super();
+
+        for(let book of books){
+            book.title = truncateTitle(book.title, 24, true);
+        }
+    }
 
     // books1=this.books;
     books1 = shuffleArray(this.books.slice());
@@ -75,17 +82,16 @@ export default Library;
 
 const bookStyles = StyleSheet.create({
     wrapper:{
-        minWidth: 150,
-        maxWidth: 150,
+        minWidth: 170,
+        flexGrow:'4',
         minHeight: 240,
         margin: 4,
-        // backgroundColor: '#eee',
         borderRadius: 8,
-        // opacity: '.6',
+        textAlign:'center'
     },
     imageWrapper:{
         minWidth: 150,
-        maxWidth: 150,
+        // maxWidth: 150,
         minHeight: 230
     },
     thumbnail:{
@@ -96,7 +102,6 @@ const bookStyles = StyleSheet.create({
             opacity: 1
         },
         ':hover':{
-            // backgroundColor: '#bbb',
             filter: 'drop-shadow(8px 8px 10px #bbb)',
             transform: 'scale(1.05,1.05)'
         },
