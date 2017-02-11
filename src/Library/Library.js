@@ -91,12 +91,14 @@ const bookStyles = StyleSheet.create({
     thumbnail:{
         width: 140,
         margin: 5,
+        transition: 'all .1s ease',
         ':after': {
             opacity: 1
         },
         ':hover':{
             // backgroundColor: '#bbb',
-            filter: 'drop-shadow(8px 8px 10px #bbb)'
+            filter: 'drop-shadow(8px 8px 10px #bbb)',
+            transform: 'scale(1.05,1.05)'
         },
     },
     title:{
