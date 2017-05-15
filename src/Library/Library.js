@@ -4,6 +4,7 @@ import books from './books.data';
 import CardRow from './CardRow/CardRow';
 import {truncateStringByWord} from '../utils/utils';
 
+// A simple helper for the randomization of our card rows (so it looks more like real data).
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -55,7 +56,7 @@ class Library extends React.Component{
     // books1=this.books;
     books1 = shuffleArray(this.books.slice());
     books2 = shuffleArray(this.books.slice());
-    books3 = shuffleArray(this.books.slice());
+    // books3 = shuffleArray(this.books.slice());
 
     render(){
         return <div
@@ -63,7 +64,7 @@ class Library extends React.Component{
                 css(styles.libraryWrapper, styles.shiftIn) :
                 css(styles.libraryWrapper)}>
             <CardRow title="Featured" books={this.books1} isLoggedIn={this.props.isLoggedIn}/>
-            {/*<CardRow title="New York Times Top List" books={shuffleArray(this.books2)} isLoggedIn={this.props.isLoggedIn}/>*/}
+            {/*<CardRow title="New York Times Top List" books={this.books2} isLoggedIn={this.props.isLoggedIn}/>*/}
             {/*<CardRow title="Books your friends like" books={shuffleArray(this.books3)} isLoggedIn={this.props.isLoggedIn}/>*/}
         </div>
     }
