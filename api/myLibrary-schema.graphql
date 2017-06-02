@@ -1,0 +1,78 @@
+enum BookState{
+  BOOK_READ,
+  BOOK_OWNED,
+  BOOK_WANTED,
+  BOOK_LOANED
+}
+
+enum BookFormat{
+  FORMAT_HARDBACK
+  FORMAT_SOFTCOVER
+  FORMAT_DIGITAL_PDF
+  FORMAT_DIGITAL_K
+  FORMAT_DIGITAL_OTHER
+}
+
+type Book{
+  id: ID!
+  title: String!
+  author: String!
+  description: String!
+  openLibraryID: String!
+  format: String!
+  rating: Int
+  progress: Int
+  condition: String
+  notes: String
+  state: BookState
+}
+
+type User{
+  su: Boolean!
+  library: [Book]!
+  firstName: String!
+  lastName: String!
+  email: String!
+  preferences: {
+    genres: [String]
+  }
+
+type Query{
+  user: User
+  book: Book
+}
+
+input CreateUserInput{
+  su: Boolean
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  preferences: {
+    genres: [String]
+  }
+}
+
+input CreateBookInput{
+  title: String!
+  author: String!
+  description: String!
+  openLibraryID: String!
+  format: String!
+  rating: Int
+  progress: Int
+  condition: String
+  notes: String
+  state: BookState
+}
+
+input UpdateBookStateInput{
+  state: BookState!
+}
+
+type Mutation{
+  createUser(input: CreateUserInput!): User
+  createBook(input CreateBookInput!): Book
+  updateBook(id: ID!, input UpdateBookStateInput!):Book
+}
+ 

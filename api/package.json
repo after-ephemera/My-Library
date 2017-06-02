@@ -1,0 +1,19 @@
+{
+  "name": "jensen-library-api",
+  "version": "1.0.0",
+  "description": "RESTful API for the Jensen Library App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "node-fetch": "^1.7.0"
+  },
+  "dependencies": {
+    "graphql": "^0.10.1"
+  }
+}

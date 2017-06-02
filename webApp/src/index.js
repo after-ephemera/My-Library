@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 ReactDOM.render(
-  <App title="My Library"/>,
-  document.getElementById('root')
+   <App title="My Library"/>,
+   document.getElementById('root')
 );
