@@ -157,7 +157,7 @@ class App extends React.Component {
     return (
        <div className={css(styles.abs)}>
          <article className={this.state.entered ? css(styles.glass, styles.fade) : css(styles.glass)}>
-           <div className={this.state.entered ? css(styles.overlay) : ''}></div>
+           <div className={this.state.entered ? css(styles.overlay) : ''} />
            {/*status: {(this.state.entered) ? 'entered':'not'}*/}
          </article>
 

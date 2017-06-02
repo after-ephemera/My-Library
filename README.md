@@ -1,5 +1,5 @@
 # My Library
-A web app built using React, RxJS, and NodeJS for managing your private library of books.
+A web app and API built using React, RxJS, NodeJS, Express, GraphQL, and MongoDB for managing your private library of books.
 Features will include:
 - Search/add your collection from an existing database of hundreds of thousands of books.
 - Offer personal ratings and see how they compare to published ratings.

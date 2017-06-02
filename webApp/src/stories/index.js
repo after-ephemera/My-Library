@@ -3,6 +3,7 @@ import { storiesOf, action, linkTo } from '@kadira/storybook';
 import Button from './Button';
 import Welcome from './Welcome';
 import Library from "../Library/Library";
+import AvatarMenu from "../AvatarMenu/AvatarMenu";
 
 // storiesOf('Welcome', module)
 //   .add('to Storybook', () => (
@@ -23,4 +24,9 @@ storiesOf('Library', module)
   ))
   .add('not logged in', () =>(
     <Library isLoggedIn={false}/>
+  ));
+
+storiesOf('Avatar Menu', module)
+  .add('closed',()=>(
+    <AvatarMenu />
   ));
