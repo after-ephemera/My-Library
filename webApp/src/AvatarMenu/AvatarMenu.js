@@ -4,14 +4,14 @@ import avatarImage from '../avatar.png';
 
 const styles = StyleSheet.create({
   avatar: {
-    width: 48,
-    height: 48,
+    width: 54,
+    height: 54,
     backgroundImage: `url(${avatarImage})`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     borderRadius: 100,
     marginLeft: 'auto',
-    marginRight: 10,
+    marginRight: 'auto',
     marginTop: 10
   },
   hideMenu:{
@@ -20,21 +20,32 @@ const styles = StyleSheet.create({
   showMenu:{
     display: 'inherit',
     position: 'absolute',
-    right: 24,
+    // right: 24,
+    right: 'calc(50% - 150px)',
     backgroundColor: 'white',
-    top: 68,
+    top: 71,
+    minHeight: 200,
+    minWidth: 300,
+    width: 300,
+    maxWidth: 300,
+    borderRadius: 8,
+    boxShadow: '0 1px 2px rgba(0,0,0,.25), 0 0 1px rgba(0,0,0,.35)',
   },
-  triangle:{
-    width: 60,
-    height: 30,
-    borderBottom: 'solid 30px white',
-    borderLeft: 'solid 30px transparent',
-    borderRight: 'solid 30px transparent',
-    margin: '0 5px',
-    position: 'relative',
-    top: '-29px',
-    left: '55px',
-  },
+  popoverArrow:{
+    clip: 'rect(0 18px 14px -4px)',
+    position: 'absolute',
+    top: -14,
+    left: 142,
+    ':after':{
+      content: '""',
+      display:'block',
+      width: 14,
+      height: 14,
+      background: '#fff',
+      transform: 'rotate(45deg) translate(6px,6px)',
+      boxShadow: '-1px -1px 1px -1px rgba(0,0,0,.44)',
+    }
+  }
 });
 
 class AvatarMenu extends React.Component {
@@ -56,7 +67,7 @@ class AvatarMenu extends React.Component {
       <section>
         <div className={css(styles.avatar)}  onClick={this.toggleMenu}/>
         <div className={this.state.showMenu ? css(styles.showMenu): css(styles.hideMenu)}>
-          <div className={css(styles.triangle)} />
+          <div className={css(styles.popoverArrow)} />
           <ul>
             <li>Something</li>
             <li>Something</li>

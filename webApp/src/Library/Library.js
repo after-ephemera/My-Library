@@ -60,17 +60,19 @@ class Library extends React.Component {
   // books3 = shuffleArray(this.books.slice());
 
   render() {
-    return this.props.isLoggedIn ? (
-       <div
+       return <div
        className={this.props.isLoggedIn ?
           css(styles.libraryWrapper, styles.shiftIn) :
           css(styles.libraryWrapper)}>
-       <AvatarMenu/>
-      <CardRow title="Featured" books={this.books1} isLoggedIn={this.props.isLoggedIn}/>
-      <CardRow title="Your List" books={this.books2} isLoggedIn={this.props.isLoggedIn}/>
-      {/*<CardRow title="Books your friends like" books={shuffleArray(this.books3)} isLoggedIn={this.props.isLoggedIn}/>*/}
+
+         {this.props.isLoggedIn ? (
+            <section>
+              <AvatarMenu/>
+              <CardRow title="Featured" books={this.books1} isLoggedIn={this.props.isLoggedIn}/>
+              <CardRow title="Your List" books={this.books2} isLoggedIn={this.props.isLoggedIn}/>
+            </section>
+         ) : (<div>not logged in</div>)}
     </div>
-  ) : (<div>not logged in</div>)
   }
 }
 
