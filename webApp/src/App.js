@@ -22,17 +22,17 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundPosition: 'right',
     ':before': {
-      'width': '100%',
-      'height': '100%',
-      'overflow': 'hidden',
-      'z-index': '-1',
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden',
+      zIndex: '-1',
       display: 'block',
       position: 'absolute',
       content: ' ',
     }
   },
   fade: {
-    'background-image': "url('" + blurImage + "')",
+    // 'background-image': "url('" + blurImage + "')",
     '-webkit-animation-name': {
       '0%': {
         opacity: '0',
@@ -55,9 +55,11 @@ const styles = StyleSheet.create({
     }
   },
   title: {
-    'text-align': 'center',
-    'padding-top': '25vh',
-    'width': '65vw',
+    textAlign: 'center',
+    width: '100vw',
+    height: '50vh',
+    marginTop: '25vh',
+
     position: 'absolute',
     zIndex: '4',
     top: 0
@@ -78,7 +80,8 @@ const styles = StyleSheet.create({
     'font-family': 'Work Sans',
     'font-weight': '200',
     'font-size': '24px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    userSelect: 'none',
   }, shiftTransition),
   h1: Object.assign({
     'font-size': 64,
@@ -104,12 +107,12 @@ const styles = StyleSheet.create({
   },
   abs: {
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   hide: {
     display: 'none'
-  }
-
+  },
+  image: shiftTransition,
 });
 
 class App extends React.Component {
@@ -158,7 +161,6 @@ class App extends React.Component {
        <div className={css(styles.abs)}>
          <article className={this.state.entered ? css(styles.glass, styles.fade) : css(styles.glass)}>
            <div className={this.state.entered ? css(styles.overlay) : ''} />
-           {/*status: {(this.state.entered) ? 'entered':'not'}*/}
          </article>
 
          <div className={this.state.hideTitle ? css(styles.title, styles.hide) : css(styles.title)}>
@@ -166,7 +168,7 @@ class App extends React.Component {
               className={this.state.entered ? css(styles.lobster, styles.h1, styles.shiftOut) : css(styles.lobster, styles.h1)}>
              My Library</h1>
            <div className={this.state.entered ? css(styles.enterButton, styles.shiftOut) : css(styles.enterButton)}>
-             <a className={css(styles.enterLabel)} onClick={this.enter.bind(this)}>Enter</a>
+             <a className={css(styles.enterLabel)} onClick={this.enter.bind(this)}>{'log in'}</a>
              <hr className={css(styles.rule)}/>
            </div>
          </div>

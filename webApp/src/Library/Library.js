@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   shiftIn: {
     // bottom: 900
     top: 0,
-    opacity: '1'
+    opacity: '1',
   }
 });
 
