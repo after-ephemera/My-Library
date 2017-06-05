@@ -3,7 +3,6 @@ import {StyleSheet, css} from "aphrodite";
 import books from './books.data';
 import CardRow from './CardRow/CardRow';
 import {truncateStringByWord} from '../utils/utils';
-import AvatarMenu from "../AvatarMenu/AvatarMenu";
 
 // A simple helper for the randomization of our card rows (so it looks more like real data).
 function shuffleArray(array) {
@@ -46,12 +45,13 @@ class Library extends React.Component {
   // Dummy data
   books = books;
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     for (let book of books) {
       book.title = truncateStringByWord(book.title, 24, true);
     }
+    console.log('Props: ', this.props);
   }
 
   // books1=this.books;
@@ -60,19 +60,22 @@ class Library extends React.Component {
   // books3 = shuffleArray(this.books.slice());
 
   render() {
-       return <div
-       className={this.props.isLoggedIn ?
+    return (
+      <section>
+        <div
+          className={this.props.isLoggedIn ?
           css(styles.libraryWrapper, styles.shiftIn) :
           css(styles.libraryWrapper)}>
 
-         {this.props.isLoggedIn ? (
+          {this.props.isLoggedIn ? (
             <section>
-              <AvatarMenu/>
               <CardRow title="Featured" books={this.books1} isLoggedIn={this.props.isLoggedIn}/>
               <CardRow title="Your List" books={this.books2} isLoggedIn={this.props.isLoggedIn}/>
             </section>
-         ) : (<div>not logged in</div>)}
-    </div>
+          ) : (<div>not logged in</div>)}
+        </div>
+        <h1>{this.props.isLoggedIn ? 'Logged in' : 'Logged out'}</h1>
+      </section>)
   }
 }
 

@@ -145,7 +145,7 @@ class App extends React.Component {
   }
 
   enter = () => {
-    console.log('Entering the app!');
+    console.log('Entering the app!', this.props);
     this.setState({
       entered: !this.state.entered,
       isLoggedIn: true
@@ -166,7 +166,7 @@ class App extends React.Component {
          <div className={this.state.hideTitle ? css(styles.title, styles.hide) : css(styles.title)}>
            <h1
               className={this.state.entered ? css(styles.lobster, styles.h1, styles.shiftOut) : css(styles.lobster, styles.h1)}>
-             My Library</h1>
+             {this.props.title || "My Library"}</h1>
            <div className={this.state.entered ? css(styles.enterButton, styles.shiftOut) : css(styles.enterButton)}>
              <a className={css(styles.enterLabel)} onClick={this.enter.bind(this)}>{'log in'}</a>
              <hr className={css(styles.rule)}/>

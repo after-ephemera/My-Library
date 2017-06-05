@@ -4,6 +4,7 @@ import Button from './Button';
 import Welcome from './Welcome';
 import Library from "../Library/Library";
 import AvatarMenu from "../AvatarMenu/AvatarMenu";
+import BookDetail from "../BookDetail/BookDetail";
 
 // storiesOf('Welcome', module)
 //   .add('to Storybook', () => (
@@ -30,3 +31,8 @@ storiesOf('Avatar Menu', module)
   .add('closed',()=>(
     <AvatarMenu />
   ));
+
+storiesOf('BookDetail')
+  .add('Guide', ()=>(
+    <BookDetail title='title' author="author" cover="https://images-na.ssl-images-amazon.com/images/I/A1HGWCA36hL.jpg"/>
+  ))
