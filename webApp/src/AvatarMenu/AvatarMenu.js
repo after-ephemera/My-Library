@@ -4,6 +4,9 @@ import avatarImage from '../avatar.png';
 import {Link} from "react-router-dom";
 
 const styles = StyleSheet.create({
+  a:{
+    cursor: 'pointer',
+  },
   avatar: {
     width: 54,
     height: 54,
@@ -70,11 +73,9 @@ class AvatarMenu extends React.Component {
         <div className={css(styles.avatar)}  onClick={this.toggleMenu}/>
         <div className={this.state.showMenu ? css(styles.showMenu): css(styles.hideMenu)}>
           <div className={css(styles.popoverArrow)} />
-          <ul>
-            <li><Link to={'/detail/69045'}>Details</Link></li>
-            <li>Something</li>
-            <li>Something</li>
-            <li>Something</li>
+          <ul onClick={this.toggleMenu}>
+            <li><Link  className={css(styles.a)} to={'/'}>Home</Link></li>
+            <li><Link  className={css(styles.a)} to={'/detail/69045'}>Details</Link></li>
           </ul>
         </div>
       </section>

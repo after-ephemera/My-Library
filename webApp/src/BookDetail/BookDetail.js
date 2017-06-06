@@ -1,23 +1,35 @@
 import React from 'react';
 import {StyleSheet, css} from "aphrodite";
 import Rx from 'rxjs';
+import BookNotes from "./BookNotes/BookNotes";
 
 const styles = StyleSheet.create({
+  title:{
+    margin: 0,
+  },
+  author:{
+    marginTop: 0,
+  },
   coverImage:{
-    maxHeight: '80vh',
-    minHeight: '60vh',
+    minHeight: '45vh',
+    maxWidth: '100%',
+    // marginTop: 20,
+    padding: '0 10px',
   },
   flexParent:{
     display: 'flex',
+    flexWrap: 'wrap',
+  },
+  flexHorizontal:{
+    marginTop: 24,
+    justifyContent: 'space-around',
   },
   flexVertical:{
-    flexDirection: 'column'
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '50vw',
+    padding: '0 20px',
   },
-
-  notes:{
-    boxShadow: '0 1px 2px rgba(0,0,0,.25), 0 0 1px rgba(0,0,0,.35)',
-    border: 'none',
-  }
 });
 
 class BookDetail extends React.Component {
@@ -46,6 +58,7 @@ class BookDetail extends React.Component {
        })
        .flatMap(books =>{
          this.setState(books[0]);
+         // Get google books result for description.
          return Rx.Observable.ajax({url: `https://www.googleapis.com/books/v1/volumes?q=isbn:${books[0].isbn[0]}`, crossDomain: true});
        })
        .subscribe(books => {
@@ -59,12 +72,17 @@ class BookDetail extends React.Component {
 
   render(){
     return(
-       <section className={css(styles.flexParent)}>
+       <section className={css(styles.flexParent, styles.flexHorizontal)}>
          <img src={this.state.coverUrl} className={css(styles.coverImage)} alt={this.state.coverUrl ? 'Cover Image' : 'No Cover Image'} />
          <div className={css(styles.flexParent, styles.flexVertical)}>
-           <h3>{this.state.title} by {this.state.author}</h3>
+           {(this.state.title && this.state.author) ? (
+              <section>
+                <h3 className={css(styles.title)}>{this.state.title}</h3>
+                <h4 className={css(styles.author)}>by {this.state.author}</h4>
+              </section>) : 'Loading...'
+           }
            <span>{this.state.description}</span>
-           {this.owned ? <textarea className={css(styles.notes)}></textarea>: ''}
+           {this.owned ? <BookNotes editing="true" label="Private Notes" content={this.state.notes} />: ''}
          </div>
          {/*<BookActionBox />*/}
        </section>
