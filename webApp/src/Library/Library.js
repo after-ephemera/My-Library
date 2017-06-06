@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     top: '100vh',
     zIndex: 20,
     overflow: 'scroll',
-    opacity: '0'
+    opacity: '0',
+    marginTop: 50,
   },
   library: {
     position: 'absolute',
@@ -74,7 +75,7 @@ class Library extends React.Component {
             </section>
           ) : (<div>not logged in</div>)}
         </div>
-        <h1>{this.props.isLoggedIn ? 'Logged in' : 'Logged out'}</h1>
+        {/*<h1>{this.props.isLoggedIn ? 'Logged in' : 'Logged out'}</h1>*/}
       </section>)
   }
 }

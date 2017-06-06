@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     width: '100%',
     boxShadow: '0 1px 2px rgba(0,0,0,.25), 0 0 1px rgba(0,0,0,.35)',
     border: 'none',
+    marginTop: 4,
+    ':focus':{
+      outlineColor:'beige'
+    }
   },
   label:{
     marginTop: 18,

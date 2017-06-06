@@ -30,6 +30,13 @@ const styles = StyleSheet.create({
     width: '50vw',
     padding: '0 20px',
   },
+  loadingImage:{
+    width: 350,
+    height: 519,
+    backgroundColor: 'beige',
+    margin: '0 10px',
+    display: 'inline-block',
+  },
 });
 
 class BookDetail extends React.Component {
@@ -73,7 +80,12 @@ class BookDetail extends React.Component {
   render(){
     return(
        <section className={css(styles.flexParent, styles.flexHorizontal)}>
-         <img src={this.state.coverUrl} className={css(styles.coverImage)} alt={this.state.coverUrl ? 'Cover Image' : 'No Cover Image'} />
+         {
+           this.state.coverUrl ?
+              <img src={this.state.coverUrl} className={css(styles.coverImage)} alt='Cover' />
+              :
+              <div className={css(styles.loadingImage)}>Loading...</div>
+         }
          <div className={css(styles.flexParent, styles.flexVertical)}>
            {(this.state.title && this.state.author) ? (
               <section>

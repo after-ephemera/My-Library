@@ -1,10 +1,9 @@
 import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
-import Button from './Button';
-import Welcome from './Welcome';
 import Library from "../Library/Library";
 import AvatarMenu from "../AvatarMenu/AvatarMenu";
 import BookDetail from "../BookDetail/BookDetail";
+import Router, {MemoryRouter} from "react-router-dom";
 
 // storiesOf('Welcome', module)
 //   .add('to Storybook', () => (
@@ -28,8 +27,11 @@ storiesOf('Library', module)
   ));
 
 storiesOf('Avatar Menu', module)
+   .addDecorator(story =>(
+      <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+   ))
   .add('closed',()=>(
-    <AvatarMenu />
+   <AvatarMenu/>
   ));
 
 storiesOf('BookDetail')

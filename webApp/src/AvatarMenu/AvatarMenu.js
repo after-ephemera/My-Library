@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     maxWidth: 300,
     borderRadius: 8,
     boxShadow: '0 1px 2px rgba(0,0,0,.25), 0 0 1px rgba(0,0,0,.35)',
+    zIndex: 22,
   },
   popoverArrow:{
     clip: 'rect(0 23px 15px -4px)',
@@ -70,6 +71,7 @@ class AvatarMenu extends React.Component {
   render(){
     return(
       <section>
+        {/*<h2 style={{position:'absolute'}}>{JSON.stringify(location.href.split('3000').pop() || 'no location')}</h2>*/}
         <div className={css(styles.avatar)}  onClick={this.toggleMenu}/>
         <div className={this.state.showMenu ? css(styles.showMenu): css(styles.hideMenu)}>
           <div className={css(styles.popoverArrow)} />
