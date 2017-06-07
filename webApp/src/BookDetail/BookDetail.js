@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, css} from "aphrodite";
 import Rx from 'rxjs';
 import BookNotes from "./BookNotes/BookNotes";
+import ActionBar from "./ActionBar/ActionBar";
 
 const styles = StyleSheet.create({
   title:{
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   flexVertical:{
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '50vw',
+    width: '35vw',
     padding: '0 20px',
   },
   loadingImage:{
@@ -41,11 +42,22 @@ const styles = StyleSheet.create({
 
 class BookDetail extends React.Component {
   books = [];
-  owned = true;
+
+  toggleOwned(){
+    console.log('Owned: ', this.state.owned);
+    this.setState({owned:!this.state.owned});
+  }
+
+  updateRating(rating){
+    console.log('Updating that gosh darn rating to ', rating);
+    this.setState({rating: rating});
+  }
 
   constructor(){
     super();
     this.state = {
+      owned: false,
+      rating: 0,
     };
     Rx.Observable.ajax({url: `http://openlibrary.org/search.json?q=enders+in+exile`, crossDomain: true})
        .map(res => res.response.docs)
@@ -94,9 +106,18 @@ class BookDetail extends React.Component {
               </section>) : 'Loading...'
            }
            <span>{this.state.description}</span>
-           {this.owned ? <BookNotes editing="true" label="Private Notes" content={this.state.notes} />: ''}
+           {this.state.owned ? <BookNotes editing="true" label="Private Notes" content={this.state.notes} />: ''}
          </div>
-         {/*<BookActionBox />*/}
+         {/*<label htmlFor="toggleowned">Toggle Owned</label>*/}
+         {/*<input type="checkbox" onClick={this.toggleOwned.bind(this)} name="toggleowned"/>*/}
+         <ActionBar
+            numberOfCopies={2}
+            owned={this.state.owned}
+            rating={this.state.rating}
+            onAddToLibrary={this.toggleOwned.bind(this)}
+            onRemoveFromLibrary={this.toggleOwned.bind(this)}
+            onUpdateRating={(rating) => this.updateRating(rating)}
+         />
        </section>
     )
   }

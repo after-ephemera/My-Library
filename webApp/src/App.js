@@ -36,21 +36,17 @@ const styles = StyleSheet.create({
     '-webkit-animation-name': {
       '0%': {
         opacity: '0',
-        // transform: 'scale(1.05) rotate(4deg)'
       },
       '100%': {
         opacity: '1',
-        // transform: 'scale(1.05) rotate(-4deg)'
       }
     },
     animationName: {
       '0%': {
         opacity: '0',
-        // transform: 'scale(1.05) rotate(4deg)'
       },
       '100%': {
         opacity: '1',
-        // transform: 'scale(1.05) rotate(-4deg)'
       }
     }
   },
@@ -71,8 +67,6 @@ const styles = StyleSheet.create({
     width: 75,
     margin: 'auto',
     ':hover': {
-      // color: 'white',
-      // 'background-color': 'black',
       'opacity': '.75'
     }
   }, shiftTransition),
@@ -141,7 +135,6 @@ class App extends React.Component {
     };
     console.log('New state: ', newState);
     this.setState(newState);
-
   }
 
   enter = () => {

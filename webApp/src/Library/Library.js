@@ -6,9 +6,9 @@ import {truncateStringByWord} from '../utils/utils';
 
 // A simple helper for the randomization of our card rows (so it looks more like real data).
 function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = array[i];
     array[i] = array[j];
     array[j] = temp;
   }
@@ -17,8 +17,6 @@ function shuffleArray(array) {
 
 const styles = StyleSheet.create({
   libraryWrapper: {
-    // color: 'blue',
-    // backgroundColor: 'orange',
     width: '100%',
     height: '100%',
     transition: 'all 1s ease-out',
@@ -35,7 +33,6 @@ const styles = StyleSheet.create({
     top: 0
   },
   shiftIn: {
-    // bottom: 900
     top: 0,
     opacity: '1',
   }
