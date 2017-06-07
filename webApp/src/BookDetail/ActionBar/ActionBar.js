@@ -38,6 +38,10 @@ class ActionBar extends React.Component {
     this.setState({addedToWishlist: !this.state.addedToWishlist});
   }
 
+  markAsRead(){
+    this.setState({read: true});
+  }
+
   constructor(props){
     super(props);
     this.state = {
@@ -45,6 +49,7 @@ class ActionBar extends React.Component {
       addedToWishlist: false,
       showAddedLibraryMessage: false,
       showAddedWishlistMessage: false,
+      read: false
     };
     this.addToWishlist = this.addToWishlist.bind(this);
     this.addToLibrary = this.props.onAddToLibrary;
@@ -56,10 +61,10 @@ class ActionBar extends React.Component {
     if (this.props.owned) {
       return (
          <section className={css(styles.flexParent)}>
-           <span><span className={css(styles.checkboxWrapper)}><span className={css(styles.check)}>&#x2713;</span></span> Owned</span>
+           <span><DoneCheck /> Owned</span>
+           { this.state.read ? <span><DoneCheck/>Read</span> : ''}
            {this.props.numberOfCopies ? <span># of copies: {this.props.numberOfCopies}</span> : ''}
            <button>Loan</button>
-           <button>I read it</button>
            <button onClick={this.removeFromLibrary}>Remove from Library</button>
            <StarRating starCount={this.props.rating} onUpdate={(rating) => this.setRating(rating)}/>
          </section>
@@ -67,7 +72,8 @@ class ActionBar extends React.Component {
     } else {
       return (
          <section className={css(styles.flexParent)}>
-           You don't own this book yet.
+           <span>You don't own this book yet.</span>
+           { this.state.read ? <span><DoneCheck/>Read</span> : <button onClick={this.markAsRead.bind(this)}>I read it</button>}
            {
              this.state.addedToLibrary ?
                 <span className={this.state.showAddedLibraryMessage ? css(styles.addedMessage) : css(styles.hide)}>
@@ -83,5 +89,9 @@ class ActionBar extends React.Component {
     }
   }
 }
+
+let DoneCheck = (props)=>{
+  return (<span className={css(styles.checkboxWrapper)}><span className={css(styles.check)}>&#x2713;</span></span>);
+};
 
 export default ActionBar;

@@ -16,7 +16,7 @@ class StarRating extends React.Component{
   }
 
   reset(){
-    this.updateStarCount(this.props.starCount);
+    this.setState({starCount: this.props.starCount});
   }
 
   constructor(props){
