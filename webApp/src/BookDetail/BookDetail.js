@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
   coverImage:{
     minHeight: '45vh',
     maxWidth: '100%',
-    // marginTop: 20,
     padding: '0 10px',
   },
   flexParent:{
@@ -28,8 +27,9 @@ const styles = StyleSheet.create({
   flexVertical:{
     flexDirection: 'column',
     justifyContent: 'center',
+    minWidth: '45vw',
     width: '35vw',
-    padding: '0 20px',
+    padding: '20px',
   },
   loadingImage:{
     width: 350,
@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
     margin: '0 10px',
     display: 'inline-block',
   },
+  format:{
+    fontStyle: 'italic',
+  }
 });
 
 class BookDetail extends React.Component {
@@ -58,6 +61,7 @@ class BookDetail extends React.Component {
     this.state = {
       owned: false,
       rating: 0,
+      format: 'Hardcover'
     };
     Rx.Observable.ajax({url: `http://openlibrary.org/search.json?q=enders+in+exile`, crossDomain: true})
        .map(res => res.response.docs)
@@ -103,9 +107,10 @@ class BookDetail extends React.Component {
               <section>
                 <h3 className={css(styles.title)}>{this.state.title}</h3>
                 <h4 className={css(styles.author)}>by {this.state.author}</h4>
-              </section>) : 'Loading...'
+              </section>) : <span>Loading...</span>
            }
            <span>{this.state.description}</span>
+           <span className={css(styles.format)}>Format: {this.state.format}</span>
            {this.state.owned ? <BookNotes editing="true" label="Private Notes" content={this.state.notes} />: ''}
          </div>
          {/*<label htmlFor="toggleowned">Toggle Owned</label>*/}

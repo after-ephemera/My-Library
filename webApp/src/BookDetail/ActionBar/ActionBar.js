@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'column'
   },
+  wrapper: {
+    padding: 40,
+  },
   checkboxWrapper:{
     width: '1em',
     height: '1em',
@@ -60,7 +63,7 @@ class ActionBar extends React.Component {
   render(){
     if (this.props.owned) {
       return (
-         <section className={css(styles.flexParent)}>
+         <section className={css(styles.flexParent, styles.wrapper)}>
            <span><DoneCheck /> Owned</span>
            { this.state.read ? <span><DoneCheck/>Read</span> : ''}
            {this.props.numberOfCopies ? <span># of copies: {this.props.numberOfCopies}</span> : ''}
@@ -71,7 +74,7 @@ class ActionBar extends React.Component {
       )
     } else {
       return (
-         <section className={css(styles.flexParent)}>
+         <section className={css(styles.flexParent, styles.wrapper)}>
            <span>You don't own this book yet.</span>
            { this.state.read ? <span><DoneCheck/>Read</span> : <button onClick={this.markAsRead.bind(this)}>I read it</button>}
            {
