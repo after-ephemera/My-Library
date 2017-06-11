@@ -1,3 +1,4 @@
+
 /**
  * Truncates the title of a book to be less than the specified length, cutting
  * on the offending word. If the first word is longer than the maxLength

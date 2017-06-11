@@ -3,6 +3,7 @@ import {StyleSheet, css} from "aphrodite";
 import Rx from "rxjs";
 import blurImage from "./white-blur.jpg";
 import Library from './Library/Library';
+import {checkLogin} from "./utils/http/HTTP";
 
 
 const shiftTransition = {
@@ -84,16 +85,6 @@ const styles = StyleSheet.create({
   rule: Object.assign({
     width: 55,
   }, shiftTransition),
-  overlay: {
-    zIndex: '3',
-    backgroundColor: '#fff',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    opacity: '.3'
-  },
   shiftOut: {
     // bottom: 900
     top: '-65vh',
@@ -107,6 +98,9 @@ const styles = StyleSheet.create({
     display: 'none'
   },
   image: shiftTransition,
+  fadeOut:{
+    opacity: 0,
+  },
 });
 
 class App extends React.Component {
@@ -139,10 +133,18 @@ class App extends React.Component {
 
   enter = () => {
     console.log('Entering the app!', this.props);
-    this.setState({
-      entered: !this.state.entered,
-      isLoggedIn: true
-    });
+    if(checkLogin()){
+      this.setState({
+        entered: !this.state.entered,
+        isLoggedIn: true,
+      });
+    } else{
+      this.setState({
+        entered: !this.state.entered,
+        isLoggedIn: false,
+      })
+    }
+
     setTimeout(() => {
       this.setState({hideTitle: true})
     }, 1000)
@@ -152,20 +154,23 @@ class App extends React.Component {
 
     return (
        <div className={css(styles.abs)}>
-         <article className={this.state.entered ? css(styles.glass, styles.fade) : css(styles.glass)}>
-           <div className={this.state.entered ? css(styles.overlay) : ''} />
-         </article>
 
          <div className={this.state.hideTitle ? css(styles.title, styles.hide) : css(styles.title)}>
+
            <h1
               className={this.state.entered ? css(styles.lobster, styles.h1, styles.shiftOut) : css(styles.lobster, styles.h1)}>
-             {this.props.title || "My Library"}</h1>
-           <div className={this.state.entered ? css(styles.enterButton, styles.shiftOut) : css(styles.enterButton)}>
+             {this.props.title || 'My Library'}</h1>
+
+           <div className={this.state.entered ? css(styles.enterButton, styles.fadeOut) : css(styles.enterButton)}>
+
              <a className={css(styles.enterLabel)} onClick={this.enter.bind(this)}>{'log in'}</a>
              <hr className={css(styles.rule)}/>
+
            </div>
          </div>
+
          <Library isLoggedIn={this.state.isLoggedIn}/>
+
        </div>
     )
   }

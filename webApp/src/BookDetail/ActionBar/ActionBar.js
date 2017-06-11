@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
   hide:{
     opacity: 0,
   },
+  button:{
+    marginTop: 8,
+  },
 });
 
 class ActionBar extends React.Component {
@@ -67,8 +70,8 @@ class ActionBar extends React.Component {
            <span><DoneCheck /> Owned</span>
            { this.state.read ? <span><DoneCheck/>Read</span> : ''}
            {this.props.numberOfCopies ? <span># of copies: {this.props.numberOfCopies}</span> : ''}
-           <button>Loan</button>
-           <button onClick={this.removeFromLibrary}>Remove from Library</button>
+           <button className={css(styles.button)}>Loan</button>
+           <button className={css(styles.button)} onClick={this.removeFromLibrary}>Remove from Library</button>
            <StarRating starCount={this.props.rating} onUpdate={(rating) => this.setRating(rating)}/>
          </section>
       )
@@ -76,16 +79,16 @@ class ActionBar extends React.Component {
       return (
          <section className={css(styles.flexParent, styles.wrapper)}>
            <span>You don't own this book yet.</span>
-           { this.state.read ? <span><DoneCheck/>Read</span> : <button onClick={this.markAsRead.bind(this)}>I read it</button>}
+           { this.state.read ? <span><DoneCheck/>Read</span> : <button className={css(styles.button)} onClick={this.markAsRead.bind(this)}>I read it</button>}
            {
              this.state.addedToLibrary ?
                 <span className={this.state.showAddedLibraryMessage ? css(styles.addedMessage) : css(styles.hide)}>
                   Added to library!
                 </span>
-                : <button onClick={this.addToLibrary}>
+                : <button className={css(styles.button)} onClick={this.addToLibrary}>
                   Add to Library
                 </button>}
-           {this.state.addedToWishlist ? <span>Added to wishlist!</span> : <button onClick={this.addToWishlist}>Add to Wishlist</button>}
+           {this.state.addedToWishlist ? <span>Added to wishlist!</span> : <button className={css(styles.button)} onClick={this.addToWishlist}>Add to Wishlist</button>}
            <StarRating starCount={this.props.rating} onUpdate={(rating) => this.setRating(rating)}/>
          </section>
       )

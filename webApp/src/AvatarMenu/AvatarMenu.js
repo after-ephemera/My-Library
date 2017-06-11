@@ -130,7 +130,7 @@ class AvatarMenu extends React.Component {
               <li className={css(styles.hrWrapper)}><hr className={css(styles.hr)} /></li>
 
               <li onClick={this.toggleMenu} className={css(styles.li)}>
-                <Link className={css(styles.a)} to={'/'}>Home</Link>
+                <Link className={css(styles.a)} to={'/'}>My Library</Link>
               </li>
 
               <li onClick={this.toggleMenu} className={css(styles.li)}>
