@@ -4,6 +4,7 @@ import Rx from "rxjs";
 import blurImage from "./white-blur.jpg";
 import Library from './Library/Library';
 import {checkLogin} from "./utils/http/HTTP";
+import Login from "./Login/Login";
 
 
 const shiftTransition = {
@@ -54,10 +55,8 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     width: '100vw',
-    height: '50vh',
-    marginTop: '25vh',
-
-    position: 'absolute',
+    height: '20vh',
+    marginTop: '20vh',
     zIndex: '4',
     top: 0
   },
@@ -159,7 +158,7 @@ class App extends React.Component {
 
            <h1
               className={this.state.entered ? css(styles.lobster, styles.h1, styles.shiftOut) : css(styles.lobster, styles.h1)}>
-             {this.props.title || 'My Library'}</h1>
+             {this.props.title || 'Waterfall'}</h1>
 
            <div className={this.state.entered ? css(styles.enterButton, styles.fadeOut) : css(styles.enterButton)}>
 
@@ -168,6 +167,7 @@ class App extends React.Component {
 
            </div>
          </div>
+         <Login />
 
          <Library isLoggedIn={this.state.isLoggedIn}/>
 
