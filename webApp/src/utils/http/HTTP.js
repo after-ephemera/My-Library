@@ -6,3 +6,11 @@
 export function checkLogin(){
   return true;
 }
+
+/**
+ * Sends a request to login
+ * @returns {boolean}
+ */
+export function login(credentials){
+  return true
+}

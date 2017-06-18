@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, css} from "aphrodite";
+import * as HTTP from '../utils/http/HTTP';
 
 const styles = StyleSheet.create({
   wrapper:{
@@ -9,7 +10,7 @@ const styles = StyleSheet.create({
   login:{
     width: 400,
     height: 350,
-    background: 'linear-gradient(#172a3c , white)',
+    background: 'linear-gradient(#172a3c , whitesmoke)',
     // border: '1px solid #172a3c',
     borderRadius: 8,
     color: '#ffffff',
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
   centerBox:{
     marginRight: 'auto',
     marginLeft: 'auto',
-    marginTop: 70,
+    marginTop: 44,
     width: 240,
   },
 
@@ -30,14 +31,14 @@ const styles = StyleSheet.create({
     width: 240,
     fontSize: '1.2em',
     borderRadius: 4,
-    marginBottom: 8,
+    marginBottom: 28,
   },
   submitButton:{
     width: 150,
     fontSize: '1.2em',
     marginRight: 45,
     marginLeft: 45,
-    marginTop: 12,
+    marginTop: 28,
     border: 'none',
     background: '#FFD363',
     color: '#172a3c',
@@ -55,21 +56,28 @@ class Login extends React.Component{
 
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleUsernameChange(name){
-    this.setState({username: name.target.value});
+  handleUsernameChange(event){
+    this.setState({username: event.target.value});
   }
 
-  handlePasswordChange(pass){
-    this.setState({password: pass.target.value});
+  handlePasswordChange(event){
+    this.setState({password: event.target.value});
+  }
+
+  handleSubmit(event){
+    let loggedIn = HTTP.login(this.state);
+    console.log('Login submitted: ', loggedIn ? 'successfully' : 'unsuccessful', this.state);
+    event.preventDefault();
   }
 
   render(){
     return (
      <div className={css(styles.wrapper)}>
        <div className={css(styles.login)}>
-         <form className={css(styles.centerBox)}>
+         <form className={css(styles.centerBox)} onSubmit={this.handleSubmit}>
            <label htmlFor="username">
              <span className={css(styles.inputLabel)}>Username</span>
             <input type="text"
