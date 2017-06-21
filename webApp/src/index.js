@@ -8,7 +8,7 @@ import {
 import BookDetail from "./BookDetail/BookDetail";
 import AvatarMenu from "./AvatarMenu/AvatarMenu";
 
-
+// https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md
 ReactDOM.render(
    <Router>
      <div>

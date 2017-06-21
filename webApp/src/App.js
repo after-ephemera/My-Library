@@ -8,7 +8,7 @@ import Login from "./Login/Login";
 
 
 const shiftTransition = {
-  transition: 'all 1s ease-out',
+  transition: 'all .3s ease-out',
   position: 'relative',
   bottom: 0,
   top: 0,
@@ -100,6 +100,10 @@ const styles = StyleSheet.create({
   fadeOut:{
     opacity: 0,
   },
+  hideLogin:{
+    opacity: 0,
+    transition: 'all .3s ease-out',
+  },
 });
 
 class App extends React.Component {
@@ -108,6 +112,7 @@ class App extends React.Component {
     this.state = {
       entered: false,
       isLoggedIn: false,
+      loggingIn: false,
       hideTitle: false
     };
     // HTTP Request test.
@@ -118,7 +123,7 @@ class App extends React.Component {
          console.error(err);
        });
     console.info(blurImage);
-
+    this.login = this.login.bind(this);
   }
 
   update(e) {
@@ -146,8 +151,16 @@ class App extends React.Component {
 
     setTimeout(() => {
       this.setState({hideTitle: true})
-    }, 1000)
+    }, 1000);
   };
+
+  login(){
+    this.setState({loggingIn: true});
+
+    // setTimeout(() => {
+    //   this.setState({hideTitle: true})
+    // }, 1000);
+  }
 
   render() {
 
@@ -160,14 +173,15 @@ class App extends React.Component {
               className={this.state.entered ? css(styles.lobster, styles.h1, styles.shiftOut) : css(styles.lobster, styles.h1)}>
              {this.props.title || 'Waterfall'}</h1>
 
-           <div className={this.state.entered ? css(styles.enterButton, styles.fadeOut) : css(styles.enterButton)}>
+           <div className={this.state.loggingIn ? css(styles.enterButton, styles.fadeOut) : css(styles.enterButton)}>
 
-             <a className={css(styles.enterLabel)} onClick={this.enter.bind(this)}>{'log in'}</a>
+             {/*<a className={css(styles.enterLabel)} onClick={this.enter.bind(this)}>{'log in'}</a>*/}
+             <a className={css(styles.enterLabel)} onClick={this.login}>{'log in'}</a>
              <hr className={css(styles.rule)}/>
 
            </div>
          </div>
-         <Login />
+         <Login className={this.state.loggingIn ? css(styles.hideLogin) : css(styles.fadeOut)} />
 
          <Library isLoggedIn={this.state.isLoggedIn}/>
 

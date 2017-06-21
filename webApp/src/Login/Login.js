@@ -54,17 +54,21 @@ class Login extends React.Component{
       password: '',
     };
 
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleUsernameChange(event){
-    this.setState({username: event.target.value});
-  }
-
-  handlePasswordChange(event){
-    this.setState({password: event.target.value});
+  handleInputChange(event){
+    switch(event.target.name){
+      case 'username':
+        this.setState({password: event.target.value});
+        break;
+      case 'pass':
+        this.setState({password: event.target.value});
+        break;
+      default:
+        break;
+    }
   }
 
   handleSubmit(event){
@@ -83,7 +87,7 @@ class Login extends React.Component{
             <input type="text"
                    name="username"
                    value={this.state.username}
-                   onChange={this.handleUsernameChange}
+                   onChange={this.handleInputChange}
                    className={css(styles.input)}
             />
            </label>
@@ -92,7 +96,7 @@ class Login extends React.Component{
             <input type="password"
                    name="pass"
                    value={this.state.password}
-                   onChange={this.handlePasswordChange}
+                   onChange={this.handleInputChange}
                    className={css(styles.input)}
             />
            </label>
