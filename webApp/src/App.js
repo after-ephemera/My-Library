@@ -100,10 +100,6 @@ const styles = StyleSheet.create({
   fadeOut:{
     opacity: 0,
   },
-  hideLogin:{
-    opacity: 0,
-    transition: 'all .3s ease-out',
-  },
 });
 
 class App extends React.Component {
@@ -175,13 +171,12 @@ class App extends React.Component {
 
            <div className={this.state.loggingIn ? css(styles.enterButton, styles.fadeOut) : css(styles.enterButton)}>
 
-             {/*<a className={css(styles.enterLabel)} onClick={this.enter.bind(this)}>{'log in'}</a>*/}
              <a className={css(styles.enterLabel)} onClick={this.login}>{'log in'}</a>
              <hr className={css(styles.rule)}/>
 
            </div>
          </div>
-         <Login className={this.state.loggingIn ? css(styles.hideLogin) : css(styles.fadeOut)} />
+         <Login show={this.state.loggingIn} />
 
          <Library isLoggedIn={this.state.isLoggedIn}/>
 

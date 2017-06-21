@@ -6,6 +6,16 @@ const styles = StyleSheet.create({
   wrapper:{
     display: 'flex',
     justifyContent: 'space-around',
+    transition: 'all .4s ease',
+    position: 'relative',
+  },
+  hide:{
+    top: '2vh',
+    opacity: 0,
+  },
+  show:{
+    top:0,
+    opacity: 1,
   },
   login:{
     width: 400,
@@ -42,7 +52,7 @@ const styles = StyleSheet.create({
     border: 'none',
     background: '#FFD363',
     color: '#172a3c',
-  }
+  },
 });
 
 class Login extends React.Component{
@@ -79,7 +89,7 @@ class Login extends React.Component{
 
   render(){
     return (
-     <div className={css(styles.wrapper)}>
+     <div className={this.props.show ? css(styles.show, styles.wrapper) : css(styles.hide, styles.wrapper)}>
        <div className={css(styles.login)}>
          <form className={css(styles.centerBox)} onSubmit={this.handleSubmit}>
            <label htmlFor="username">
