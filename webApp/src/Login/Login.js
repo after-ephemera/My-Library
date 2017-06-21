@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   hide:{
-    top: '2vh',
+    top: '5vh',
     opacity: 0,
   },
   show:{
@@ -66,6 +66,7 @@ class Login extends React.Component{
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event){
@@ -85,6 +86,7 @@ class Login extends React.Component{
     let loggedIn = HTTP.login(this.state);
     console.log('Login submitted: ', loggedIn ? 'successfully' : 'unsuccessful', this.state);
     event.preventDefault();
+    this.props.onLogin();
   }
 
   render(){

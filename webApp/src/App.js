@@ -8,7 +8,7 @@ import Login from "./Login/Login";
 
 
 const shiftTransition = {
-  transition: 'all .3s ease-out',
+  transition: 'all 1s ease-out',
   position: 'relative',
   bottom: 0,
   top: 0,
@@ -16,42 +16,6 @@ const shiftTransition = {
 };
 
 const styles = StyleSheet.create({
-  glass: {
-    position: 'relative',
-    'animation-duration': '.75s',
-    'animation-fill-mode': 'both',
-    'background-size': 'cover',
-    overflow: 'hidden',
-    backgroundPosition: 'right',
-    ':before': {
-      width: '100%',
-      height: '100%',
-      overflow: 'hidden',
-      zIndex: '-1',
-      display: 'block',
-      position: 'absolute',
-      content: ' ',
-    }
-  },
-  fade: {
-    // 'background-image': "url('" + blurImage + "')",
-    '-webkit-animation-name': {
-      '0%': {
-        opacity: '0',
-      },
-      '100%': {
-        opacity: '1',
-      }
-    },
-    animationName: {
-      '0%': {
-        opacity: '0',
-      },
-      '100%': {
-        opacity: '1',
-      }
-    }
-  },
   title: {
     textAlign: 'center',
     width: '100vw',
@@ -99,6 +63,7 @@ const styles = StyleSheet.create({
   image: shiftTransition,
   fadeOut:{
     opacity: 0,
+    height: 0,
   },
 });
 
@@ -120,6 +85,7 @@ class App extends React.Component {
        });
     console.info(blurImage);
     this.login = this.login.bind(this);
+    this.enter = this.enter.bind(this);
   }
 
   update(e) {
@@ -137,11 +103,13 @@ class App extends React.Component {
       this.setState({
         entered: !this.state.entered,
         isLoggedIn: true,
+        loggingIn: false,
       });
     } else{
       this.setState({
         entered: !this.state.entered,
         isLoggedIn: false,
+        loggingIn: false,
       })
     }
 
@@ -152,10 +120,6 @@ class App extends React.Component {
 
   login(){
     this.setState({loggingIn: true});
-
-    // setTimeout(() => {
-    //   this.setState({hideTitle: true})
-    // }, 1000);
   }
 
   render() {
@@ -176,7 +140,7 @@ class App extends React.Component {
 
            </div>
          </div>
-         <Login show={this.state.loggingIn} />
+         <Login show={this.state.loggingIn}  onLogin={this.enter}/>
 
          <Library isLoggedIn={this.state.isLoggedIn}/>
 
