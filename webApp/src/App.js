@@ -95,6 +95,7 @@ class App extends React.Component {
     console.info(blurImage);
     this.login = this.login.bind(this);
     this.enter = this.enter.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   update(e) {
@@ -131,6 +132,10 @@ class App extends React.Component {
     this.setState({loggingIn: true});
   }
 
+  reset(){
+    this.setState({loggingIn: false, signingUp: false});
+  }
+
   render() {
 
     return (
@@ -153,7 +158,7 @@ class App extends React.Component {
 
            </div>
          </div>
-         <Login show={this.state.loggingIn}  onLogin={this.enter}/>
+         <Login show={this.state.loggingIn}  onLogin={this.enter} onCancel={this.reset}/>
 
          <Library isLoggedIn={this.state.isLoggedIn}/>
 

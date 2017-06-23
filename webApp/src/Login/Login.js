@@ -76,7 +76,7 @@ class Login extends React.Component{
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   handleInputChange(event){
@@ -97,6 +97,12 @@ class Login extends React.Component{
     console.log('Login submitted: ', loggedIn ? 'successfully' : 'unsuccessful', this.state);
     event.preventDefault();
     this.props.onLogin();
+  }
+
+  handleCancel(event){
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.onCancel();
   }
 
   render(){
@@ -123,7 +129,7 @@ class Login extends React.Component{
             />
            </label>
            <input type="submit" value="submit" className={css(styles.submitButton)}/>
-           <button className={"waterfall-button " + css(styles.cancelButton)}>Cancel</button>
+           <button className={"waterfall-button " + css(styles.cancelButton)} onClick={this.handleCancel}>Cancel</button>
          </form>
        </div>
      </div>)
