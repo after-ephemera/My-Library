@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   },
   submitButton:{
     width: 150,
+    height: 48,
     fontSize: '1.2em',
     marginRight: 45,
     marginLeft: 45,
@@ -52,7 +53,16 @@ const styles = StyleSheet.create({
     border: 'none',
     background: '#FFD363',
     color: '#172a3c',
+    borderRadius: 4,
+    transition: 'background .3s ease',
+    ':hover':{
+      background: '#ffe677',
+    }
   },
+  cancelButton:{
+    marginTop: 8,
+    width: '100%',
+  }
 });
 
 class Login extends React.Component{
@@ -112,7 +122,8 @@ class Login extends React.Component{
                    className={css(styles.input)}
             />
            </label>
-           <input type="submit" value="Submit" className={css(styles.submitButton)}/>
+           <input type="submit" value="submit" className={css(styles.submitButton)}/>
+           <button className={"waterfall-button " + css(styles.cancelButton)}>Cancel</button>
          </form>
        </div>
      </div>)

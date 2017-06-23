@@ -40,12 +40,24 @@ body {
   font-size: 100%;
 }
 
-.preload * {
-  transition: none !important;
+/*.preload * {*/
+  /*transition: none !important;*/
+/*}*/
+
+/* Widgets */
+.waterfall-button{
+  height: 48px;
+  background-color: transparent;
+  border: none;
+  color: #172a3c;
+  opacity:1;
+  -webkit-transition: opacity .3s ease;
+  -moz-transition: opacity .3s ease;
+  -ms-transition: opacity .3s ease;
+  -o-transition: opacity .3s ease;
+  transition: opacity .3s ease;
 }
 
-/*article::before{*/
-  /*background-image: url('../src/white-blur.jpg');*/
-  /*background-size: cover;*/
-  /*opacity: 0.4;*/
-/*}*/
+.waterfall-button:hover{
+  opacity: .5;
+}

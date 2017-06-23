@@ -7,12 +7,14 @@ import {checkLogin} from "./utils/http/HTTP";
 import Login from "./Login/Login";
 
 
-const shiftTransition = {
-  transition: 'all 1s ease-out',
-  position: 'relative',
-  bottom: 0,
-  top: 0,
-  opacity: 1
+const shiftTransition = (length)=> {
+  return {
+    transition: `all ${length}s ease-out`,
+    position: 'relative',
+    bottom: 0,
+    top: 0,
+    opacity: 1
+  }
 };
 
 const styles = StyleSheet.create({
@@ -27,40 +29,47 @@ const styles = StyleSheet.create({
   lobster: {
     'font-family': 'Lobster',
   },
-  enterButton: Object.assign({
+  hoverButton: Object.assign({
     width: 75,
     margin: 'auto',
     ':hover': {
       'opacity': '.75'
     }
-  }, shiftTransition),
+  }, shiftTransition(.1)),
   enterLabel: Object.assign({
-    'font-family': 'Work Sans',
-    'font-weight': '200',
-    'font-size': '24px',
+    fontFamily: 'Work Sans',
+    fontWeight: 200,
+    fontSize: 24,
     cursor: 'pointer',
     userSelect: 'none',
-  }, shiftTransition),
+  }, shiftTransition(1)),
+  signUpLabel: Object.assign({
+    fontFamily: 'Work Sans',
+    fontWeight: 200,
+    fontSize: 14,
+    cursor: 'pointer',
+    userSelect: 'none',
+  }),
   h1: Object.assign({
     'font-size': 64,
     'letter-spacing': 1.5
-  }, shiftTransition),
+  }, shiftTransition(1)),
   rule: Object.assign({
     width: 55,
-  }, shiftTransition),
+  }, shiftTransition(1)),
   shiftOut: {
     // bottom: 900
     top: '-65vh',
     opacity: 0
   },
-  abs: {
+  fullSize: {
     width: '100%',
     height: '100%',
   },
   hide: {
     display: 'none'
   },
-  image: shiftTransition,
+  image: shiftTransition(1),
   fadeOut:{
     opacity: 0,
     height: 0,
@@ -125,18 +134,22 @@ class App extends React.Component {
   render() {
 
     return (
-       <div className={css(styles.abs)}>
+       <div className={css(styles.fullSize)}>
 
          <div className={this.state.hideTitle ? css(styles.title, styles.hide) : css(styles.title)}>
 
-           <h1
-              className={this.state.entered ? css(styles.lobster, styles.h1, styles.shiftOut) : css(styles.lobster, styles.h1)}>
-             {this.props.title || 'Waterfall'}</h1>
+           <h1 className={
+                this.state.entered ?
+                   css(styles.lobster, styles.h1, styles.shiftOut) :
+                   css(styles.lobster, styles.h1)}>
+             {this.props.title || 'Waterfall'}
+           </h1>
 
-           <div className={this.state.loggingIn ? css(styles.enterButton, styles.fadeOut) : css(styles.enterButton)}>
+           <div className={this.state.loggingIn ? css(styles.fadeOut) : ''}>
 
-             <a className={css(styles.enterLabel)} onClick={this.login}>{'log in'}</a>
+             <a className={css(styles.hoverButton, styles.enterLabel)} onClick={this.login}>{'log in'}</a>
              <hr className={css(styles.rule)}/>
+             <a className={css(styles.hoverButton, styles.signUpLabel)} onClick={this.login}>{'sign up'}</a>
 
            </div>
          </div>
