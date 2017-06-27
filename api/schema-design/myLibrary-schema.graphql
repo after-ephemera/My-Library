@@ -1,0 +1,32 @@
+input CreateUserInput {
+  su: Boolean
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+  preferences: Preferences
+}
+
+input CreateBookInput {
+  title: String!
+  author: String!
+  description: String!
+  openLibraryID: String!
+  format: String!
+  rating: Int
+  progress: Int
+  condition: String
+  notes: String
+  state: BookState
+}
+
+input UpdateBookStateInput {
+  state: BookState!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User
+  createBook(input: CreateBookInput!): Book
+  updateBook(id: ID!, input: UpdateBookStateInput!): Book
+}
+ 

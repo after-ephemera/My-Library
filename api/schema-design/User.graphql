@@ -1,0 +1,9 @@
+type User {
+  su: Boolean!
+  library: [Book]!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  preferences: Preferences
+}
