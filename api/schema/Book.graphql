@@ -1,0 +1,61 @@
+type Book {
+  id: ObjID!
+  id: ID!
+  title: String!
+  author: String!
+  description: String!
+  openLibraryID: String!
+  format: String!
+  rating: Int
+  progress: Int
+  condition: String
+  notes: String
+  state: String!
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  books(lastCreatedAt: Float, limit: Int): [Book!]
+  book(id: ObjID!): Book
+}
+
+input CreateBookInput {
+  id: ID!
+  title: String!
+  author: String!
+  description: String!
+  openLibraryID: String!
+  format: String!
+  rating: Int
+  progress: Int
+  condition: String
+  notes: String
+  state: String!
+}
+
+input UpdateBookInput {
+  id: ID!
+  title: String!
+  author: String!
+  description: String!
+  openLibraryID: String!
+  format: String!
+  rating: Int
+  progress: Int
+  condition: String
+  notes: String
+  state: String!
+}
+
+extend type Mutation {
+  createBook(input: CreateBookInput!): Book
+  updateBook(id: ObjID!, input: UpdateBookInput!): Book
+  removeBook(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  bookCreated: Book
+  bookUpdated: Book
+  bookRemoved: ObjID
+}

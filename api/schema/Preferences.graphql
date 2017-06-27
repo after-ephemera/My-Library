@@ -1,0 +1,32 @@
+type Preferences {
+  id: ObjID!
+  genres: [String]
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  preferencess(lastCreatedAt: Float, limit: Int): [Preferences!]
+  preferences(id: ObjID!): Preferences
+  preferences: [Preferences]
+}
+
+input CreatePreferencesInput {
+  genres:[String!]
+}
+
+input UpdatePreferencesInput {
+  genres:[String!]
+}
+
+extend type Mutation {
+  createPreferences(input: CreatePreferencesInput!): Preferences
+  updatePreferences(id: ObjID!, input: UpdatePreferencesInput!): Preferences
+  removePreferences(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  preferencesCreated: Preferences
+  preferencesUpdated: Preferences
+  preferencesRemoved: ObjID
+}

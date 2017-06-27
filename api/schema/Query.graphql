@@ -1,0 +1,34 @@
+type Query {
+  id: ObjID!
+  user: User
+  book: Book
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  querys(lastCreatedAt: Float, limit: Int): [Query!]
+  query(id: ObjID!): Query
+}
+
+input CreateQueryInput {
+  userId: ObjID
+  bookId: ObjID
+}
+
+input UpdateQueryInput {
+  userId: ObjID
+  bookId: ObjID
+}
+
+extend type Mutation {
+  createQuery(input: CreateQueryInput!): Query
+  updateQuery(id: ObjID!, input: UpdateQueryInput!): Query
+  removeQuery(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  queryCreated: Query
+  queryUpdated: Query
+  queryRemoved: ObjID
+}
