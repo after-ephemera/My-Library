@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class Login extends React.Component{
+class SignUp extends React.Component{
 
   constructor(props){
     super(props);
@@ -120,33 +120,34 @@ class Login extends React.Component{
 
   render(){
     return (
-     <div className={this.props.show ? css(styles.show, styles.wrapper) : css(styles.hide, styles.wrapper)}>
-       <div className={css(styles.login)}>
-         <form className={css(styles.centerBox)} onSubmit={(e) => {e.preventDefault();this.handleSubmit();}}>
-           <label htmlFor="email">
-             <span className={css(styles.inputLabel)}>email</span>
-            <input type="text"
-                   name="email"
-                   value={this.state.email}
-                   onChange={this.handleInputChange}
-                   className={css(styles.input)}
-            />
-           </label>
-           <label htmlFor="pass">
-             <span className={css(styles.inputLabel)}>Password</span>
-            <input type="password"
-                   name="pass"
-                   value={this.state.password}
-                   onChange={this.handleInputChange}
-                   className={css(styles.input)}
-            />
-           </label>
-           <input type="submit" value="submit" className={css(styles.submitButton)}/>
-           <button className={"waterfall-button " + css(styles.cancelButton)}  onClick={this.handleCancel}>Cancel</button>
-         </form>
-       </div>
-     </div>)
+       <div className={this.props.show ? css(styles.show, styles.wrapper) : css(styles.hide, styles.wrapper)}>
+         <div className={css(styles.login)}>
+           sign up
+           <form className={css(styles.centerBox)} onSubmit={(e) => {e.preventDefault();this.handleSubmit();}}>
+             <label htmlFor="email">
+               <span className={css(styles.inputLabel)}>email</span>
+               <input type="text"
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.handleInputChange}
+                      className={css(styles.input)}
+               />
+             </label>
+             <label htmlFor="pass">
+               <span className={css(styles.inputLabel)}>Password</span>
+               <input type="password"
+                      name="pass"
+                      value={this.state.password}
+                      onChange={this.handleInputChange}
+                      className={css(styles.input)}
+               />
+             </label>
+             <input type="submit" value="submit" className={css(styles.submitButton)}/>
+             <button className={"waterfall-button " + css(styles.cancelButton)}  onClick={this.handleCancel}>Cancel</button>
+           </form>
+         </div>
+       </div>)
   }
 }
 
-export default Login;
+export default SignUp;

@@ -5,6 +5,7 @@ import blurImage from "./white-blur.jpg";
 import Library from './Library/Library';
 import {checkLogin} from "./utils/http/HTTP";
 import Login from "./Login/Login";
+import SignUp from "./SignUp/SignUp";
 
 
 const shiftTransition = (length)=> {
@@ -94,6 +95,7 @@ class App extends React.Component {
        });
     console.info(blurImage);
     this.login = this.login.bind(this);
+    this.signUp = this.signUp.bind(this);
     this.enter = this.enter.bind(this);
     this.reset = this.reset.bind(this);
   }
@@ -129,7 +131,11 @@ class App extends React.Component {
   };
 
   login(){
-    this.setState({loggingIn: true});
+    this.setState({loggingIn: true, signingIn: false});
+  }
+
+  signUp(){
+    this.setState({signingUp: true, loggingIn: false})
   }
 
   reset(){
@@ -150,14 +156,15 @@ class App extends React.Component {
              {this.props.title || 'Waterfall'}
            </h1>
 
-           <div className={this.state.loggingIn ? css(styles.fadeOut) : ''}>
+           <div className={(this.state.loggingIn || this.state.signingUp) ? css(styles.fadeOut) : ''}>
 
              <a className={css(styles.hoverButton, styles.enterLabel)} onClick={this.login}>{'log in'}</a>
              <hr className={css(styles.rule)}/>
-             <a className={css(styles.hoverButton, styles.signUpLabel)} onClick={this.login}>{'sign up'}</a>
+             <a className={css(styles.hoverButton, styles.signUpLabel)} onClick={this.signUp}>{'sign up'}</a>
 
            </div>
          </div>
+         <SignUp show={this.state.signingUp}  onCreate={this.enter} onCancel={this.reset}/>
          <Login show={this.state.loggingIn}  onLogin={this.enter} onCancel={this.reset}/>
 
          <Library isLoggedIn={this.state.isLoggedIn}/>
