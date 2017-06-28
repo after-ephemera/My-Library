@@ -39,11 +39,12 @@ async function startServer() {
 
   authenticate(app);
 
-  app.use('/graphql', (req, res, next) => {
+  app.use('/api', (req, res, next) => {
     passport.authenticate('jwt', { session: false }, (err, user) => {
       graphqlExpress(() => {
         if(err || !user){
-          res.json({error:'Not authenticated'});
+          res.status(401).json({error:err ? `Not authenticated. ${err}` : 'Not authenticated'});
+          return;
         }
         // Get the query, the same way express-graphql does it
         // https://github.com/graphql/express-graphql/blob/3fa6e68582d6d933d37fa9e841da5d2aa39261cd/src/index.js#L257
@@ -64,8 +65,13 @@ async function startServer() {
     })(req, res, next);
   });
 
+  app.get("/secret", passport.authenticate('jwt', { session: false }), function(req, res){
+    res.json({message: "Success! You can not see this without a token"});
+  });
+
   app.use('/graphiql', graphiqlExpress({
-    endpointURL: '/graphql',
+    endpointURL: '/api?',
+    passHeader: '\'Authorization\':\'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1OTUyODZiYzM1ZjkyOGI1OTk5N2Q0NzAifQ.jdL3QEXJ2fD-wo2C6sbiJh9-TvxoyrqqZX15rCmcoKU\''
   }));
 
   app.listen(PORT, () => console.log(

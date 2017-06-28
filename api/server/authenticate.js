@@ -43,8 +43,10 @@ export default function addPassport(app) {
         userId: user._id.toString(),
       };
 
+      // Remove the hash so we can send back the user.
+      const {hash, ...userSimple} = user;
       const token = jwt.encode(payload, KEY);
-      res.json({ token });
+      res.json({ token, user:userSimple });
     } catch (e) {
       next(e);
     }
