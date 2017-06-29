@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-import store, { history } from '../store';
+import store, { history } from './store';
 
 // https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md
 ReactDOM.render(

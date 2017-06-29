@@ -7,16 +7,16 @@ const styles = StyleSheet.create({
   wrapper:{
     display: 'flex',
     justifyContent: 'space-around',
-    transition: 'all .4s ease',
+    transition: 'top .5s ease, opacity .4s ease-in',
     position: 'absolute',
     left: 'calc(50vw - 200px)',
   },
   hide:{
-    top: '95vh',
+    top: '96vh',
     opacity: 0,
   },
   show:{
-    top: '35vh',
+    top: '26vh',
     opacity: 1,
   },
   login:{
@@ -28,10 +28,15 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   centerBox:{
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    flexWrap:'wrap',
+
     marginRight: 'auto',
     marginLeft: 'auto',
-    marginTop: 44,
-    width: 240,
+    height: '100%',
+    padding: '5%',
   },
 
   inputLabel:{
@@ -39,19 +44,22 @@ const styles = StyleSheet.create({
     display:'block',
     clear: 'both',
   },
+  field:{
+    marginRight: 'auto',
+    marginLeft: 'auto',
+  },
   input:{
     width: 240,
     fontSize: '1.2em',
     borderRadius: 4,
-    marginBottom: 28,
   },
   submitButton:{
     width: 150,
     height: 48,
     fontSize: '1.2em',
-    marginRight: 45,
-    marginLeft: 45,
-    marginTop: 28,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: 44,
     border: 'none',
     background: '#FFD363',
     color: '#172a3c',
@@ -62,8 +70,10 @@ const styles = StyleSheet.create({
     }
   },
   cancelButton:{
-    marginTop: 8,
     width: '100%',
+    ':focus':{
+      outline: 'none'
+    }
   }
 });
 
@@ -135,7 +145,7 @@ class SignUp extends React.Component{
          <div className={css(styles.login)}>
            sign up
            <form className={css(styles.centerBox)} onSubmit={(e) => {e.preventDefault();this.handleSubmit();}}>
-             <label htmlFor="firstName">
+             <label htmlFor="firstName" className={css(styles.field)}>
                <span className={css(styles.inputLabel)}>first name</span>
                <input type="text"
                       name="firstName"
@@ -144,7 +154,7 @@ class SignUp extends React.Component{
                       className={css(styles.input)}
                />
              </label>
-             <label htmlFor="lastName">
+             <label htmlFor="lastName" className={css(styles.field)}>
                <span className={css(styles.inputLabel)}>last name</span>
                <input type="text"
                       name="lastName"
@@ -153,7 +163,7 @@ class SignUp extends React.Component{
                       className={css(styles.input)}
                />
              </label>
-             <label htmlFor="email">
+             <label htmlFor="email" className={css(styles.field)}>
                <span className={css(styles.inputLabel)}>email</span>
                <input type="text"
                       name="email"
@@ -162,7 +172,7 @@ class SignUp extends React.Component{
                       className={css(styles.input)}
                />
              </label>
-             <label htmlFor="pass">
+             <label htmlFor="pass" className={css(styles.field)}>
                <span className={css(styles.inputLabel)}>Password</span>
                <input type="password"
                       name="pass"

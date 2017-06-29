@@ -3,21 +3,38 @@ import {StyleSheet, css} from "aphrodite";
 import * as HTTP from '../utils/http/HTTP';
 import {AuthService} from '../utils/auth/Auth'
 
+const keyframes = {
+  '0%': {
+    opacity: 0,
+    top: '102vh',
+  },
+  '70%': {
+    opacity: 0,
+    top: '26vh',
+  },
+  '100%': {
+    opacity: 1,
+  }
+};
+
 const styles = StyleSheet.create({
   wrapper:{
     display: 'flex',
     justifyContent: 'space-around',
-    transition: 'all .4s ease',
+    // transition: 'top .5s ease, opacity .8s ease-in-out',
     position: 'absolute',
     left: 'calc(50vw - 200px)',
   },
   hide:{
-    top: '95vh',
+    top: '96vh',
     opacity: 0,
   },
   show:{
-    top: '35vh',
-    opacity: 1,
+    top: '26vh',
+    // opacity: 1,
+    animationName: keyframes,
+    animationDuration: '1s',
+    animationIterationCount: '1',
   },
   login:{
     width: 400,
@@ -145,7 +162,7 @@ class Login extends React.Component{
             />
            </label>
            <label htmlFor="pass" className={css(styles.field)}>
-             <span className={css(styles.inputLabel)}>Password</span>
+             <span className={css(styles.inputLabel)}>password</span>
             <input type="password"
                    name="pass"
                    value={this.state.password}

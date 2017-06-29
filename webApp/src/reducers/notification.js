@@ -9,8 +9,10 @@ const initialState = {
 export default (state = initialState, action) =>{
   switch(action){
     case SHOW_TIMEOUT:
-      break;
+      return state;
     case SHOW_PERSISTENT:
-      break;
+      return state;
+    default:
+      return state;
   }
 }
