@@ -9,13 +9,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     transition: 'all .4s ease',
     position: 'absolute',
+    left: 'calc(50vw - 200px)',
   },
   hide:{
-    top: '5vh',
+    top: '95vh',
     opacity: 0,
   },
   show:{
-    top:0,
+    top: '35vh',
     opacity: 1,
   },
   login:{
@@ -27,10 +28,15 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   centerBox:{
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    flexWrap:'wrap',
+
     marginRight: 'auto',
     marginLeft: 'auto',
-    marginTop: 44,
-    width: 240,
+    height: '100%',
+    padding: '5%',
   },
 
   inputLabel:{
@@ -38,19 +44,22 @@ const styles = StyleSheet.create({
     display:'block',
     clear: 'both',
   },
+  field:{
+    marginRight: 'auto',
+    marginLeft: 'auto',
+  },
   input:{
     width: 240,
     fontSize: '1.2em',
     borderRadius: 4,
-    marginBottom: 28,
   },
   submitButton:{
     width: 150,
     height: 48,
     fontSize: '1.2em',
-    marginRight: 45,
-    marginLeft: 45,
-    marginTop: 28,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: 44,
     border: 'none',
     background: '#FFD363',
     color: '#172a3c',
@@ -61,8 +70,10 @@ const styles = StyleSheet.create({
     }
   },
   cancelButton:{
-    marginTop: 8,
     width: '100%',
+    ':focus':{
+      outline: 'none'
+    }
   }
 });
 
@@ -92,19 +103,20 @@ class Login extends React.Component{
       default:
         break;
     }
-  }
+  };
 
   handleSubmit(event){
+    console.log('Submitted!');
     HTTP.login(this.state)
        .catch(err =>{
-         console.error('Error: ', err, event);
-         alert('Bad email/password.')
+         console.error('Login error: ', err);
          // Show an error message.
+         alert('Bad email/password.');
        })
        .subscribe(response =>{
          AuthService.token = response.token;
          AuthService.user = response.user;
-         console.log('Login submitted: ', 'successfully', this.state);
+         console.log('Login submitted: successfully', this.state);
 
          this.props.onLogin();
        });
@@ -123,7 +135,7 @@ class Login extends React.Component{
      <div className={this.props.show ? css(styles.show, styles.wrapper) : css(styles.hide, styles.wrapper)}>
        <div className={css(styles.login)}>
          <form className={css(styles.centerBox)} onSubmit={(e) => {e.preventDefault();this.handleSubmit();}}>
-           <label htmlFor="email">
+           <label htmlFor="email" className={css(styles.field)}>
              <span className={css(styles.inputLabel)}>email</span>
             <input type="text"
                    name="email"
@@ -132,7 +144,7 @@ class Login extends React.Component{
                    className={css(styles.input)}
             />
            </label>
-           <label htmlFor="pass">
+           <label htmlFor="pass" className={css(styles.field)}>
              <span className={css(styles.inputLabel)}>Password</span>
             <input type="password"
                    name="pass"

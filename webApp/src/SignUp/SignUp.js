@@ -9,13 +9,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     transition: 'all .4s ease',
     position: 'absolute',
+    left: 'calc(50vw - 200px)',
   },
   hide:{
-    top: '5vh',
+    top: '95vh',
     opacity: 0,
   },
   show:{
-    top:0,
+    top: '35vh',
     opacity: 1,
   },
   login:{
@@ -72,6 +73,8 @@ class SignUp extends React.Component{
     super(props);
     this.state = {
       email: '',
+      firstName: '',
+      lastName: '',
       password: '',
     };
 
@@ -92,9 +95,17 @@ class SignUp extends React.Component{
       default:
         break;
     }
-  }
+  };
 
   handleSubmit(event){
+    // User needs the following:
+    // su: Boolean!
+    //    firstName: String!
+    //    lastName: String!
+    //    email: String!
+    //    password: String!
+    //    preferencesId: ObjID
+
     HTTP.login(this.state)
        .catch(err =>{
          console.error('Error: ', err, event);
@@ -124,6 +135,24 @@ class SignUp extends React.Component{
          <div className={css(styles.login)}>
            sign up
            <form className={css(styles.centerBox)} onSubmit={(e) => {e.preventDefault();this.handleSubmit();}}>
+             <label htmlFor="firstName">
+               <span className={css(styles.inputLabel)}>first name</span>
+               <input type="text"
+                      name="firstName"
+                      value={this.state.firstName}
+                      onChange={this.handleInputChange}
+                      className={css(styles.input)}
+               />
+             </label>
+             <label htmlFor="lastName">
+               <span className={css(styles.inputLabel)}>last name</span>
+               <input type="text"
+                      name="lastName"
+                      value={this.state.lastName}
+                      onChange={this.handleInputChange}
+                      className={css(styles.input)}
+               />
+             </label>
              <label htmlFor="email">
                <span className={css(styles.inputLabel)}>email</span>
                <input type="text"
