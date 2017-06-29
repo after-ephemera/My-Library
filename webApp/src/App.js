@@ -3,7 +3,7 @@ import {Route, Redirect} from 'react-router-dom';
 import Main from "./Main";
 import BookDetail from "./BookDetail/BookDetail";
 import NotificationCenter from "./NotificationCenter/NotificationCenter";
-import {addTimeoutNotification} from "./reducers/notification";
+import {addTimeoutNotification, addPersistentNotification} from "./reducers/notification";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
@@ -24,7 +24,19 @@ class App extends React.Component {
          id: 0,
          length: 2500,
          message: 'You did it! ' + ++this.index,
-         color: colors[this.index % colors.length]
+         color: colors[this.index % colors.length],
+         key: this.index,
+       });
+  };
+
+  showPersistentNotification = () => {
+    this.props.addPersistentNotification(
+       {
+         id: 0,
+         length: 2500,
+         message: 'You did it! ' + ++this.index,
+         color: colors[this.index % colors.length],
+         key: this.index,
        });
   };
 
@@ -39,19 +51,24 @@ class App extends React.Component {
             <Redirect to="/"/>
          )}/>
        </main>
-       <div onClick={this.showNotification}>Click me for a new notification</div>
+       <div onClick={this.showNotification}>Click me for a new timeout notification</div>
+       <hr/>
+       <div onClick={this.showPersistentNotification}>Click me for a new persistent notification</div>
      </div>
   );
 }
+
 const mapStateToProps = state => {
   console.log('Mapping state to props', state);
   return {
     notifications: state.notification.notifications,
     addTimeoutNotification: state.notification.addTimeoutNotification,
+    addPersistentNotification: state.notification.addPersistentNotification,
   }};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   addTimeoutNotification,
+  addPersistentNotification,
 }, dispatch);
 
 export default connect(

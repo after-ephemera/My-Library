@@ -1,29 +1,40 @@
 
-export const SHOW_TIMEOUT = 'SHOW_NOTIFICATION_TIMEOUT';
+export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
 export const SHOW_PERSISTENT = 'SHOW_NOTIFICATION_PERSISTENT';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 
 const initialState = {
   notifications: [],
+  currentNotificationIndex: 0,
+};
+
+let notificationIndexByKey = (notifications, key)=>{
+  return notifications.map((o)=>{
+    return o.key;
+  }).indexOf(key);
 };
 
 export default (state = initialState, action) =>{
   switch(action.type){
-    case SHOW_TIMEOUT:
+    case SHOW_NOTIFICATION:
+      const notificationToAdd = Object.assign({}, action.notification, {index: state.currentNotificationIndex});
       return {
          ...state,
         notifications:[
            ...state.notifications,
-           action.notification
-        ]
+          notificationToAdd,
+        ],
+        currentNotificationIndex: state.currentNotificationIndex + 1,
       };
     case SHOW_PERSISTENT:
       return {
          ...state,
       };
     case REMOVE_NOTIFICATION:
+      let keyIndex = notificationIndexByKey(state.notifications, action.notification.key);
       let notifications = [
-         ...state.notifications.slice(1, state.notifications.length+1)
+         ...state.notifications.slice(0, keyIndex),
+         ...state.notifications.slice(keyIndex + 1)
       ];
       return {
          ...state,
@@ -37,18 +48,28 @@ export default (state = initialState, action) =>{
 }
 
 export const addTimeoutNotification = (notification) =>{
-  console.log('Dispatching notification!', notification);
+  // console.log('Dispatching notification!', notification);
   return dispatch =>{
     dispatch({
-      type: SHOW_TIMEOUT,
+      type: SHOW_NOTIFICATION,
       notification,
     });
 
     setTimeout(()=>{
       dispatch({
         type: REMOVE_NOTIFICATION,
-        id: notification.id
+        notification,
       })
     }, notification.length);
+  }
+};
+
+export const addPersistentNotification = (notification) =>{
+  // console.log('Dispatching notification!', notification);
+  return dispatch => {
+    dispatch({
+      type: SHOW_NOTIFICATION,
+      notification,
+    });
   }
 };

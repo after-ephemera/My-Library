@@ -17,14 +17,16 @@ const style = (top, n) => {
     notification: {
       top: top,
       position: 'absolute',
-      width: '100vw',
+      width: '96vw',
       height: '100px',
       background: n.color,
       color: 'white',
       zIndex: '2000',
       animationName: appear,
       animationDuration: '.3s',
-      border: '1px solid black',
+      margin: '2vw 2vh 0 2vw',
+      borderRadius: 8,
+
     }
   });
 };
@@ -36,7 +38,7 @@ class Notification extends React.Component{
     this.state = props;
   }
   render = ()=> (
-    <div className={css(style(100 * this.props.index, this.props.notification).notification)}>{JSON.stringify(this.props.notification)}</div>
+    <div className={css(style(108 * this.props.index, this.props.notification).notification)}>{JSON.stringify(this.props.notification)}</div>
   )
 }
 

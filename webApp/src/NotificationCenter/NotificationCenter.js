@@ -10,7 +10,7 @@ class NotificationCenter extends React.Component{
      <section>
      {
        this.props.notifications.map((n, i) =>{
-         return <Notification notification={n} index={i} />
+         return <Notification notification={n} index={i} key={i}/>
        })
      }
      </section>
