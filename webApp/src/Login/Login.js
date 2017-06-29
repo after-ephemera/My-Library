@@ -178,9 +178,6 @@ const mapStateToProps = state => {
    return {
   notifications: state.notification.notifications,
   addTimeoutNotification: state.notification.addTimeoutNotification,
-  // count: state.counter.count,
-  // isIncrementing: state.counter.isIncrementing,
-  // isDecrementing: state.counter.isDecrementing
 }};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
