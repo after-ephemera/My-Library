@@ -22,7 +22,9 @@ export default (state = initialState, action) =>{
          ...state,
       };
     case REMOVE_NOTIFICATION:
-      let notifications = state.notifications.slice(0,action.id).concat(state.notifications.slice(action.id+1, state.notifications.length));
+      let notifications = [
+         ...state.notifications.slice(1, state.notifications.length+1)
+      ];
       return {
          ...state,
         notifications,

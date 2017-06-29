@@ -1,44 +1,21 @@
 import React from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {StyleSheet, css} from 'aphrodite';
+import Notification from "./Notification";
 
-const appear = {
-  'from':{
-    height: '0px'
-  },
-  'to':{
-    height: '100px'
-  }
-}
 
-const styles = StyleSheet.create({
-  notification:{
-    top: 0,
-    position: 'absolute',
-    width: '100vw',
-    height:'100px',
-    background: 'orange',
-    color: 'white',
-    zIndex: '2000',
-    animationName: appear,
-    animationDuration: '.3s',
-  }
-})
+class NotificationCenter extends React.Component{
 
-const NotificationCenter = (props) =>{
-  return (
+  render = ()=> (
      <section>
-     {/*<div>Notification Center</div>*/}
      {
-       props.notifications.map(n =>{
-         /*<Notification notification={n} />*/
-         return <div className={css(styles.notification)}>{JSON.stringify(n)}</div>
+       this.props.notifications.map((n, i) =>{
+         return <Notification notification={n} index={i} />
        })
      }
      </section>
   )
-};
+}
 
 const mapStateToProps = state => {
   console.log('Mapping state to props', state);
