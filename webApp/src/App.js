@@ -1,177 +1,20 @@
-import React from "react";
-import {StyleSheet, css} from "aphrodite";
-import Rx from "rxjs";
-import blurImage from "./white-blur.jpg";
-import Library from './Library/Library';
-import {checkLogin} from "./utils/http/HTTP";
-import Login from "./Login/Login";
-import SignUp from "./SignUp/SignUp";
+import React from 'react';
+import { Route, Link } from 'react-router-dom';
+import Main from "./Main";
+import BookDetail from "./BookDetail/BookDetail";
 
+const App = () => (
+   <div>
+     <header>
+       <Link to="/">Home</Link>
+       <Link to="/detail/:bookID">Details</Link>
+     </header>
 
-const shiftTransition = (length)=> {
-  return {
-    transition: `all ${length}s ease-out`,
-    position: 'relative',
-    bottom: 0,
-    top: 0,
-    opacity: 1
-  }
-};
-
-const styles = StyleSheet.create({
-  title: {
-    textAlign: 'center',
-    width: '100vw',
-    height: '20vh',
-    marginTop: '10vh',
-    zIndex: '4',
-    top: 0
-  },
-  lobster: {
-    'font-family': 'Lobster',
-  },
-  hoverButton: Object.assign({
-    width: 75,
-    margin: 'auto',
-    ':hover': {
-      'opacity': '.75'
-    }
-  }, shiftTransition(.1)),
-  enterLabel: Object.assign({
-    fontFamily: 'Work Sans',
-    fontWeight: 200,
-    fontSize: 24,
-    cursor: 'pointer',
-    userSelect: 'none',
-  }, shiftTransition(1)),
-  signUpLabel: Object.assign({
-    fontFamily: 'Work Sans',
-    fontWeight: 200,
-    fontSize: 14,
-    cursor: 'pointer',
-    userSelect: 'none',
-  }),
-  h1: Object.assign({
-    'font-size': 64,
-    'letter-spacing': 1.5
-  }, shiftTransition(1)),
-  rule: Object.assign({
-    width: 55,
-  }, shiftTransition(1)),
-  shiftOut: {
-    // bottom: 900
-    top: '-65vh',
-    opacity: 0
-  },
-  fullSize: {
-    width: '100%',
-    height: '100%',
-  },
-  hide: {
-    display: 'none'
-  },
-  image: shiftTransition(1),
-  fadeOut:{
-    opacity: 0,
-    height: 0,
-  },
-});
-
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      entered: false,
-      isLoggedIn: false,
-      loggingIn: false,
-      hideTitle: false
-    };
-    // HTTP Request test.
-    Rx.Observable.ajax({url: `http://openlibrary.org/search.json?q=the+lord+of+the+rings`, crossDomain: true})
-       .subscribe(res => {
-         console.log(res.response);
-       }, err => {
-         console.error(err);
-       });
-    console.info(blurImage);
-    this.login = this.login.bind(this);
-    this.signUp = this.signUp.bind(this);
-    this.enter = this.enter.bind(this);
-    this.reset = this.reset.bind(this);
-  }
-
-  update(e) {
-    let newState = {
-      txt: e.target.value, entered: !this.state.entered,
-      isLoggedIn: true
-    };
-    console.log('New state: ', newState);
-    this.setState(newState);
-  }
-
-  enter = () => {
-    console.log('Entering the app!', this.props);
-    if(checkLogin()){
-      this.setState({
-        entered: !this.state.entered,
-        isLoggedIn: true,
-        loggingIn: false,
-      });
-    } else{
-      this.setState({
-        entered: !this.state.entered,
-        isLoggedIn: false,
-        loggingIn: false,
-      })
-    }
-
-    setTimeout(() => {
-      this.setState({hideTitle: true})
-    }, 1000);
-  };
-
-  login(){
-    this.setState({loggingIn: true, signingIn: false});
-  }
-
-  signUp(){
-    this.setState({signingUp: true, loggingIn: false})
-  }
-
-  reset(){
-    this.setState({loggingIn: false, signingUp: false});
-  }
-
-  render() {
-
-    return (
-       <div className={css(styles.fullSize)}>
-
-         <div className={this.state.hideTitle ? css(styles.title, styles.hide) : css(styles.title)}>
-
-           <h1 className={
-                this.state.entered ?
-                   css(styles.lobster, styles.h1, styles.shiftOut) :
-                   css(styles.lobster, styles.h1)}>
-             {this.props.title || 'Waterfall'}
-           </h1>
-
-           <div className={(this.state.loggingIn || this.state.signingUp) ? css(styles.fadeOut) : ''}>
-
-             <a className={css(styles.hoverButton, styles.enterLabel)} onClick={this.login}>{'log in'}</a>
-             <hr className={css(styles.rule)}/>
-             <a className={css(styles.hoverButton, styles.signUpLabel)} onClick={this.signUp}>{'sign up'}</a>
-
-           </div>
-         </div>
-         <SignUp show={this.state.signingUp}  onCreate={this.enter} onCancel={this.reset}/>
-         <Login show={this.state.loggingIn}  onLogin={this.enter} onCancel={this.reset}/>
-
-         <Library isLoggedIn={this.state.isLoggedIn}/>
-
-       </div>
-    )
-  }
-}
+     <main>
+       <Route exact path="/" component={Main} />
+       <Route exact path="/detail/:bookID" component={BookDetail} />
+     </main>
+   </div>
+);
 
 export default App;
