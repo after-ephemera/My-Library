@@ -45,6 +45,7 @@ export default function addPassport(app) {
       };
 
       // Remove the hash so we can send back the user.
+      //noinspection JSUnusedLocalSymbols
       const {hash, ...userSimple} = user;
       const token = jwt.encode(payload, KEY);
       res.json({ token, user:userSimple });

@@ -1,4 +1,5 @@
 import Rx from "rxjs";
+import { history } from '../../store';
 
 const SERVER_URL = `http://localhost:3000`;
 
@@ -14,6 +15,8 @@ const handleHttpError = (err)=>{
     console.error('500 - Internal server error');
   } else if(status.toString() === '401'){
     console.error('401 - Not authorized');
+    // Redirect the user back to the home page.
+    history.push('/');
   } else{
     console.error('HTTP error with status code ', status);
   }

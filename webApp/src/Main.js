@@ -1,11 +1,14 @@
 import React from "react";
 import {StyleSheet, css} from "aphrodite";
-import Rx from "rxjs";
+import {Observable} from "rxjs";
 import blurImage from "./white-blur.jpg";
 import Library from './Library/Library';
 import {checkLogin} from "./utils/http/HTTP";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
+import AvatarMenu from "./AvatarMenu/AvatarMenu";
+import {Route} from "react-router-dom";
+import {history} from './store';
 
 
 const shiftTransition = (length)=> {
@@ -78,8 +81,8 @@ const styles = StyleSheet.create({
 });
 
 class Main extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       entered: false,
       isLoggedIn: false,
@@ -88,7 +91,7 @@ class Main extends React.Component {
       hideTitle: false
     };
     // HTTP Request test.
-    Rx.Observable.ajax({url: `http://openlibrary.org/search.json?q=the+lord+of+the+rings`, crossDomain: true})
+    Observable.ajax({url: `http://openlibrary.org/search.json?q=the+lord+of+the+rings`, crossDomain: true})
        .subscribe(res => {
          console.log(res.response);
        }, err => {
@@ -99,15 +102,6 @@ class Main extends React.Component {
     this.signUp = this.signUp.bind(this);
     this.enter = this.enter.bind(this);
     this.reset = this.reset.bind(this);
-  }
-
-  update(e) {
-    let newState = {
-      txt: e.target.value, entered: !this.state.entered,
-      isLoggedIn: true
-    };
-    console.log('New state: ', newState);
-    this.setState(newState);
   }
 
   enter = () => {
@@ -134,20 +128,24 @@ class Main extends React.Component {
 
   login(){
     this.setState({loggingIn: true, signingIn: false});
+    history.push('/login');
   }
 
   signUp(){
-    this.setState({signingUp: true, loggingIn: false})
+    this.setState({signingUp: true, loggingIn: false});
+    history.push('/sign-up');
   }
 
   reset(){
     this.setState({loggingIn: false, signingUp: false});
+    history.push('/');
   }
 
   render() {
 
     return (
        <div className={css(styles.fullSize)}>
+         <AvatarMenu/>
 
          <div className={this.state.hideTitle ? css(styles.title, styles.hide) : css(styles.title)}>
 
@@ -166,8 +164,9 @@ class Main extends React.Component {
 
            </div>
          </div>
-         <SignUp show={this.state.signingUp}  onCreate={this.enter} onCancel={this.reset}/>
-         <Login show={this.state.loggingIn}  onLogin={this.enter} onCancel={this.reset}/>
+
+         <Route path={`${this.props.match.url}login`} render={()=>(<Login show={true}  onLogin={this.enter} onCancel={this.reset}/>)}/>
+         <Route path={`${this.props.match.url}sign-up`} render={()=>(<SignUp show={true}  onCreate={()=>true} onCancel={this.reset}/>)}/>
 
          <Library isLoggedIn={this.state.isLoggedIn}/>
 

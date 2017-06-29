@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     zIndex: 20,
     overflow: 'scroll',
     opacity: '0',
-    marginTop: 50,
+    marginTop: 90,
   },
   library: {
     position: 'absolute',

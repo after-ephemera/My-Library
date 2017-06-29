@@ -678,7 +678,7 @@ namespace React {
         borderCornerShape?: any;
 
         /**
-         * The property border-image-source is used to set the image to be used instead of the border style. If this is set to none the border-style is used instead.
+         * The property border-image-source is used to set the image to be used instead of the border style.js. If this is set to none the border-style.js is used instead.
          */
         borderImageSource?: any;
 
@@ -688,7 +688,7 @@ namespace React {
         borderImageWidth?: any;
 
         /**
-         * Shorthand property that defines the border-width, border-style and border-color of an element's left border in a single declaration. Note that you can use the corresponding longhand properties to set specific individual properties of the left border — border-left-width, border-left-style and border-left-color.
+         * Shorthand property that defines the border-width, border-style.js and border-color of an element's left border in a single declaration. Note that you can use the corresponding longhand properties to set specific individual properties of the left border — border-left-width, border-left-style.js and border-left-color.
          */
         borderLeft?: any;
 
@@ -699,7 +699,7 @@ namespace React {
         borderLeftColor?: any;
 
         /**
-         * Sets the style of an element's left border. To set all four borders, use the shorthand property, border-style. Otherwise, you can set the borders individually with border-top-style, border-right-style, border-bottom-style, border-left-style.
+         * Sets the style.js of an element's left border. To set all four borders, use the shorthand property, border-style.js. Otherwise, you can set the borders individually with border-top-style.js, border-right-style.js, border-bottom-style.js, border-left-style.js.
          */
         borderLeftStyle?: any;
 
@@ -709,7 +709,7 @@ namespace React {
         borderLeftWidth?: any;
 
         /**
-         * Shorthand property that defines the border-width, border-style and border-color of an element's right border in a single declaration. Note that you can use the corresponding longhand properties to set specific individual properties of the right border — border-right-width, border-right-style and border-right-color.
+         * Shorthand property that defines the border-width, border-style.js and border-color of an element's right border in a single declaration. Note that you can use the corresponding longhand properties to set specific individual properties of the right border — border-right-width, border-right-style.js and border-right-color.
          */
         borderRight?: any;
 
@@ -720,7 +720,7 @@ namespace React {
         borderRightColor?: any;
 
         /**
-         * Sets the style of an element's right border. To set all four borders, use the shorthand property, border-style. Otherwise, you can set the borders individually with border-top-style, border-right-style, border-bottom-style, border-left-style.
+         * Sets the style.js of an element's right border. To set all four borders, use the shorthand property, border-style.js. Otherwise, you can set the borders individually with border-top-style.js, border-right-style.js, border-bottom-style.js, border-left-style.js.
          */
         borderRightStyle?: any;
 
@@ -735,12 +735,12 @@ namespace React {
         borderSpacing?: any;
 
         /**
-         * Sets the style of an element's four borders. This property can have from one to four values. With only one value, the value will be applied to all four borders; otherwise, this works as a shorthand property for each of border-top-style, border-right-style, border-bottom-style, border-left-style, where each border style may be assigned a separate value.
+         * Sets the style.js of an element's four borders. This property can have from one to four values. With only one value, the value will be applied to all four borders; otherwise, this works as a shorthand property for each of border-top-style.js, border-right-style.js, border-bottom-style.js, border-left-style.js, where each border style.js may be assigned a separate value.
          */
         borderStyle?: any;
 
         /**
-         * Shorthand property that defines the border-width, border-style and border-color of an element's top border in a single declaration. Note that you can use the corresponding longhand properties to set specific individual properties of the top border — border-top-width, border-top-style and border-top-color.
+         * Shorthand property that defines the border-width, border-style.js and border-color of an element's top border in a single declaration. Note that you can use the corresponding longhand properties to set specific individual properties of the top border — border-top-width, border-top-style.js and border-top-color.
          */
         borderTop?: any;
 
@@ -761,7 +761,7 @@ namespace React {
         borderTopRightRadius?: any;
 
         /**
-         * Sets the style of an element's top border. To set all four borders, use the shorthand property, border-style. Otherwise, you can set the borders individually with border-top-style, border-right-style, border-bottom-style, border-left-style.
+         * Sets the style.js of an element's top border. To set all four borders, use the shorthand property, border-style.js. Otherwise, you can set the borders individually with border-top-style.js, border-right-style.js, border-bottom-style.js, border-left-style.js.
          */
         borderTopStyle?: any;
 
@@ -1191,12 +1191,12 @@ namespace React {
         lineHeight?: number | string;
 
         /**
-         * Shorthand property that sets the list-style-type, list-style-position and list-style-image properties in one declaration.
+         * Shorthand property that sets the list-style.js-type, list-style.js-position and list-style.js-image properties in one declaration.
          */
         listStyle?: any;
 
         /**
-         * This property sets the image that will be used as the list item marker. When the image is available, it will replace the marker set with the 'list-style-type' marker. That also means that if the image is not available, it will show the style specified by list-style-property
+         * This property sets the image that will be used as the list item marker. When the image is available, it will replace the marker set with the 'list-style.js-type' marker. That also means that if the image is not available, it will show the style.js specified by list-style.js-property
          */
         listStyleImage?: any;
 
@@ -1567,7 +1567,7 @@ namespace React {
         textDecorationSkip?: any;
 
         /**
-         * This property specifies the style of the text decoration line drawn on the specified element. The intended meaning for the values are the same as those of the border-style-properties.
+         * This property specifies the style.js of the text decoration line drawn on the specified element. The intended meaning for the values are the same as those of the border-style.js-properties.
          */
         textDecorationStyle?: any;
 
@@ -1620,8 +1620,8 @@ namespace React {
         textLineThroughMode?: any;
 
         /**
-         * Specifies the line style for line-through text decoration.
-         * (Considered obsolete; use text-decoration-style instead.)
+         * Specifies the line style.js for line-through text decoration.
+         * (Considered obsolete; use text-decoration-style.js instead.)
          */
         textLineThroughStyle?: any;
 

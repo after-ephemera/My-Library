@@ -1,21 +1,11 @@
 import React from 'react';
 import {StyleSheet, css} from "aphrodite";
 import * as HTTP from '../utils/http/HTTP';
-import {AuthService} from '../utils/auth/Auth'
-
-const keyframes = {
-  '0%': {
-    opacity: 0,
-    top: '102vh',
-  },
-  '70%': {
-    opacity: 0,
-    top: '26vh',
-  },
-  '100%': {
-    opacity: 1,
-  }
-};
+import {AuthService} from '../utils/auth/Auth';
+import {fadeInFromBelow, fadeOutToBelow} from "../utils/style/styleUtils";
+import {addTimeoutNotification} from "../reducers/notification";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 
 const styles = StyleSheet.create({
   wrapper:{
@@ -26,14 +16,17 @@ const styles = StyleSheet.create({
     left: 'calc(50vw - 200px)',
   },
   hide:{
-    top: '96vh',
-    opacity: 0,
+    top: '102vh',
+    animationName: fadeOutToBelow,
+    animationDuration: '.5s',
+    animationIterationCount: '1',
+    // opacity: 0,
   },
   show:{
     top: '26vh',
     // opacity: 1,
-    animationName: keyframes,
-    animationDuration: '1s',
+    animationName: fadeInFromBelow,
+    animationDuration: '.5s',
     animationIterationCount: '1',
   },
   login:{
@@ -122,7 +115,7 @@ class Login extends React.Component{
     }
   };
 
-  handleSubmit(event){
+  handleSubmit(){
     console.log('Submitted!');
     HTTP.login(this.state)
        .catch(err =>{
@@ -135,6 +128,7 @@ class Login extends React.Component{
          AuthService.user = response.user;
          console.log('Login submitted: successfully', this.state);
 
+         this.props.addTimeoutNotification({id: 0, length: 2000, message: 'You did it!'});
          this.props.onLogin();
        });
     return false;
@@ -176,6 +170,26 @@ class Login extends React.Component{
        </div>
      </div>)
   }
+
 }
 
-export default Login;
+const mapStateToProps = state => {
+   console.log('Mapping state to props', state);
+   return {
+  notifications: state.notification.notifications,
+  addTimeoutNotification: state.notification.addTimeoutNotification,
+  // count: state.counter.count,
+  // isIncrementing: state.counter.isIncrementing,
+  // isDecrementing: state.counter.isDecrementing
+}};
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addTimeoutNotification,
+}, dispatch);
+
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(Login)
+
+// export default Login;
