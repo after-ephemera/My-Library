@@ -36,6 +36,7 @@ export default function addPassport(app) {
 
       const user = await req.context.User.collection.findOne({ email });
       if (!user || !(await bcrypt.compare(password, user.hash))) {
+        res.status(404).json({something: 'something'});
         throw new Error('User not found matching email/password combination');
       }
 
