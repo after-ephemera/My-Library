@@ -1,5 +1,8 @@
 import React from 'react';
 import {StyleSheet, css} from 'aphrodite';
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import {removePersistentNotification} from "../reducers/notification";
 
 const appear = {
   'from':{
@@ -9,7 +12,6 @@ const appear = {
     height: '100px'
   }
 };
-
 
 const style = (top, n) => {
   console.log(' Top is : ', top);
@@ -38,8 +40,25 @@ class Notification extends React.Component{
     this.state = props;
   }
   render = ()=> (
-    <div className={css(style(108 * this.props.index, this.props.notification).notification)}>{JSON.stringify(this.props.notification)}</div>
+    <div className={css(style(108 * this.props.index, this.props.notification).notification)}
+         onClick={()=>this.props.removePersistentNotification(this.props.notification)}>
+      {JSON.stringify(this.props.notification)}
+    </div>
   )
 }
 
-export default Notification;
+
+const mapStateToProps = state => {
+  console.log('Mapping state to props', state);
+  return {
+    removePersistentNotification: state.notification.removePersistentNotification
+  }};
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  removePersistentNotification,
+}, dispatch);
+
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(Notification)

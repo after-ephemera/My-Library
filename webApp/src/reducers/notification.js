@@ -73,3 +73,12 @@ export const addPersistentNotification = (notification) =>{
     });
   }
 };
+
+export const removePersistentNotification = (notification) =>{
+  return dispatch =>{
+    dispatch({
+      type: REMOVE_NOTIFICATION,
+      notification,
+    })
+  }
+}
