@@ -6,6 +6,7 @@ import NotificationCenter from "./NotificationCenter/NotificationCenter";
 import {addTimeoutNotification, addPersistentNotification} from "./reducers/notification";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import GqlIntegration from './Examples/GqlIntegration';
 
 const colors=['orange','blue','black','silver','whitesmoke','green','pink','red'];
 
@@ -16,6 +17,10 @@ class App extends React.Component {
     super(props);
     this.showNotification = this.showNotification.bind(this);
     this.index = 0;
+    window.onbeforeunload = function(){
+      // Save state to localstorage
+      return;
+    }
   }
 
   showNotification = () => {
@@ -54,6 +59,7 @@ class App extends React.Component {
        <div onClick={this.showNotification}>Click me for a new timeout notification</div>
        <hr/>
        <div onClick={this.showPersistentNotification}>Click me for a new persistent notification</div>
+       <GqlIntegration />
      </div>
   );
 }

@@ -8,11 +8,13 @@
   },
   "dependencies": {
     "aphrodite": "^1.1.0",
+    "apollo-client": "^1.7.0",
     "getstorybook": "^1.7.0",
     "graphql-anywhere": "^3.1.0",
     "graphql-tag": "^2.4.2",
     "history": "^4.6.1",
     "react": "^15.4.2",
+    "react-apollo": "^1.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
