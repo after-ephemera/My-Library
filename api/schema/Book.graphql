@@ -1,6 +1,5 @@
 type Book {
   id: ObjID!
-  id: ID!
   title: String!
   author: String!
   description: String!
