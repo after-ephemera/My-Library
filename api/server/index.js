@@ -42,9 +42,9 @@ async function startServer() {
   app.use('/api', (req, res, next) => {
     passport.authenticate('jwt', { session: false }, (err, user) => {
       graphqlExpress(() => {
-        if(err || !user){
-          res.status(401).json({error:err ? `Not authenticated. ${err}` : 'Not authenticated'});
-        }
+        // if(err || !user){
+        //   res.status(401).json({error:err ? `Not authenticated. ${err}` : 'Not authenticated'});
+        // }
         // Get the query, the same way express-graphql does it
         // https://github.com/graphql/express-graphql/blob/3fa6e68582d6d933d37fa9e841da5d2aa39261cd/src/index.js#L257
         const query = req.query.query || req.body.query;

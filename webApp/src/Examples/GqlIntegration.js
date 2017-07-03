@@ -7,7 +7,9 @@ let GqlIntegration = (props)=>{
   return (
      <div>{props.data.users && props.data.users.map(user=>{
        return <div key={user.id}><h3>Name:{user.firstName}</h3><h4>Superuser:{user.su?'true':'false'}</h4></div>
-     })}</div>
+     })}
+       Number of books: {props.data.books && props.data.books.length}
+     </div>
   )
 };
 
@@ -17,6 +19,9 @@ export default graphql(gql`
             id
             firstName
             su
+        }
+        books {
+            id
         }
     }
 `)(GqlIntegration)
