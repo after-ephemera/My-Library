@@ -7,7 +7,7 @@ import {checkLogin} from "./utils/http/HTTP";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import AvatarMenu from "./AvatarMenu/AvatarMenu";
-import {Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import {history} from './store';
 
 
@@ -83,6 +83,8 @@ const styles = StyleSheet.create({
 class Main extends React.Component {
   constructor(props) {
     super(props);
+    this.match = props.match;
+    this.title = props.title;
     this.state = {
       entered: false,
       isLoggedIn: false,
@@ -105,7 +107,6 @@ class Main extends React.Component {
   }
 
   enter = () => {
-    console.log('Entering the app!', this.props);
     if(checkLogin()){
       this.setState({
         entered: !this.state.entered,
@@ -127,18 +128,18 @@ class Main extends React.Component {
   };
 
   login(){
-    this.setState({loggingIn: true, signingIn: false});
-    history.push('/login');
+    // this.setState({loggingIn: true, signingIn: false});
+    history.push(this.match.url + '/login');
   }
 
   signUp(){
-    this.setState({signingUp: true, loggingIn: false});
-    history.push('/sign-up');
+    // this.setState({signingUp: true, loggingIn: false});
+    history.push(this.match.url + '/sign-up');
   }
 
   reset(){
-    this.setState({loggingIn: false, signingUp: false});
-    history.push('/');
+    // this.setState({loggingIn: false, signingUp: false});
+    history.push('/home');
   }
 
   render() {
@@ -153,7 +154,7 @@ class Main extends React.Component {
                 this.state.entered ?
                    css(styles.lobster, styles.h1, styles.shiftOut) :
                    css(styles.lobster, styles.h1)}>
-             {this.props.title || 'Waterfall'}
+             {this.title || 'Waterfall'}
            </h1>
 
            <div className={(this.state.loggingIn || this.state.signingUp) ? css(styles.fadeOut) : ''}>
@@ -165,8 +166,10 @@ class Main extends React.Component {
            </div>
          </div>
 
-         <Route path={`${this.props.match.url}login`} render={()=>(<Login show={true}  onLogin={this.enter} onCancel={this.reset}/>)}/>
-         <Route path={`${this.props.match.url}sign-up`} render={()=>(<SignUp show={true}  onCreate={()=>true} onCancel={this.reset}/>)}/>
+         <Switch>
+           <Route exact path={`${this.match.url}/login`} render={()=>(<Login show={true}  onLogin={this.enter} onCancel={this.reset}/>)}/>
+           <Route exact path={`${this.match.url}/sign-up`} render={()=>(<SignUp show={true}  onCreate={()=>true} onCancel={this.reset}/>)}/>
+         </Switch>
 
          <Library isLoggedIn={this.state.isLoggedIn}/>
 
