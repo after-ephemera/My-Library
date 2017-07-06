@@ -5,8 +5,23 @@ import App from './App';
 import store from './store';
 import {ApolloProvider, ApolloClient, createNetworkInterface} from "react-apollo";
 
+
+const networkInterface = createNetworkInterface({uri: 'http://localhost:3000/api',});
+
+// Afterware to handle errors.
+networkInterface.useAfter([{
+  applyAfterware({ response }, next) {
+    if (response.status === 401) {
+      // logout();
+      console.log('Error Will Robinson');
+      return;
+    }
+    next();
+  }
+}]);
+
 const client = new ApolloClient({
-  networkInterface: createNetworkInterface({uri: 'http://localhost:3000/api',}),
+  networkInterface: networkInterface,
 });
 
 ReactDOM.render(

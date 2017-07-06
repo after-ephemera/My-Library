@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, css} from "aphrodite";
 import * as HTTP from '../utils/http/HTTP';
 import {AuthService} from '../utils/auth/Auth'
+import {gql, graphql} from "react-apollo";
 
 const styles = StyleSheet.create({
   wrapper:{
@@ -96,6 +97,12 @@ class SignUp extends React.Component{
   handleInputChange = (event) => {
     console.log(event.target.name);
     switch(event.target.name){
+      case 'firstName':
+        this.setState({firstName: event.target.value});
+        break;
+      case 'lastName':
+        this.setState({lastName: event.target.value});
+        break;
       case 'email':
         this.setState({email: event.target.value});
         break;
@@ -116,20 +123,37 @@ class SignUp extends React.Component{
     //    password: String!
     //    preferencesId: ObjID
 
-    HTTP.login(this.state)
-       .catch(err =>{
-         console.error('Error: ', err, event);
-         alert('Bad email/password.')
-         // Show an error message.
-       })
-       .subscribe(response =>{
-         AuthService.token = response.token;
-         AuthService.user = response.user;
-         console.log('Login submitted: ', 'successfully', this.state);
-
-         this.props.onLogin();
-       });
-    return false;
+    this.props.mutate({
+      variables: {
+        user: {
+          ...this.state,
+          su: false,
+        }
+      },
+      refetchQueries:[
+        {query: gql`query {
+             users {
+                 id
+                 firstName
+                 su
+             }
+         }`}
+      ]
+    });
+    // HTTP.login(this.state)
+    //    .catch(err =>{
+    //      console.error('Error: ', err, event);
+    //      alert('Bad email/password.')
+    //      // Show an error message.
+    //    })
+    //    .subscribe(response =>{
+    //      AuthService.token = response.token;
+    //      AuthService.user = response.user;
+    //      console.log('Login submitted: ', 'successfully', this.state);
+    //
+    //      this.props.onLogin();
+    //    });
+    // return false;
   }
 
   handleCancel(event){
@@ -189,4 +213,13 @@ class SignUp extends React.Component{
   }
 }
 
-export default SignUp;
+export default graphql(gql`
+    mutation userCreate($user: CreateUserInput!){
+        createUser(input: $user){
+            id
+            su
+            firstName
+        }
+    }
+   `
+)(SignUp);
