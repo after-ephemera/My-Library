@@ -1,7 +1,7 @@
 type User {
   id: ObjID!
   su: Boolean!
-  library: [Book]!
+  library: [ObjID]!
   firstName: String!
   lastName: String!
   email: String!
@@ -23,6 +23,7 @@ input CreateUserInput {
   email: String!
   password: String!
   preferencesId: ObjID
+  library: [ObjID]
 }
 
 input UpdateUserInput {

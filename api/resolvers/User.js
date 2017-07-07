@@ -5,7 +5,7 @@ const resolvers = {
     },
 
     library(user, args, { User }) {
-      return User.library(user);
+      return user.library;
     },
 
     preferences(user, args, { User }) {
