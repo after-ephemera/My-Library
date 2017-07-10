@@ -2,12 +2,13 @@ import React from "react";
 import {StyleSheet, css} from "aphrodite";
 import {Observable} from "rxjs";
 import blurImage from "./white-blur.jpg";
-import {checkLogin} from "./utils/http/HTTP";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import AvatarMenu from "./AvatarMenu/AvatarMenu";
-import {Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import {history} from './store';
+import {getLoggedIn} from "./reducers/index";
+import store from './store';
 
 
 const shiftTransition = (length)=> {
@@ -147,6 +148,8 @@ class Main extends React.Component {
 
     return (
        <div className={css(styles.fullSize)}>
+         {/* If the user is already authenticated, redirect them to their personal home page.*/}
+         {getLoggedIn(store.getState()) ? <Redirect to="/library" />: ''}
          <AvatarMenu/>
 
          <div className={this.state.hideTitle ? css(styles.title, styles.hide) : css(styles.title)}>

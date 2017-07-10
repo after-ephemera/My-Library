@@ -6,6 +6,7 @@ import {fadeInFromBelow, fadeOutToBelow} from "../utils/style/styleUtils";
 import {addTimeoutNotification} from "../reducers/notification";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {setToken} from "../reducers/auth";
 
 const styles = StyleSheet.create({
   wrapper:{
@@ -126,7 +127,7 @@ class Login extends React.Component{
        .subscribe(response =>{
          AuthService.token = response.token;
          AuthService.user = response.user;
-         console.log('Login submitted: successfully', this.state);
+         this.props.setToken(AuthService.token);
 
          this.props.addTimeoutNotification({id: 0, length: 2000, message: 'You did it!'});
          this.props.onLogin();
@@ -174,14 +175,15 @@ class Login extends React.Component{
 }
 
 const mapStateToProps = state => {
-   console.log('Mapping state to props', state);
    return {
   notifications: state.notification.notifications,
   addTimeoutNotification: state.notification.addTimeoutNotification,
+  setToken: state.auth.setToken,
 }};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   addTimeoutNotification,
+  setToken,
 }, dispatch);
 
 export default connect(

@@ -9,6 +9,8 @@ import {connect} from "react-redux";
 import {history} from './store';
 import { ConnectedRouter } from 'react-router-redux'
 import Library from "./Library/Library";
+import store from './store';
+import {getLoggedIn} from "./reducers/index";
 // import GqlIntegration from "./Examples/GqlIntegration";
 
 const colors=['orange','blue','black','silver','whitesmoke','green','pink','red'];
@@ -52,6 +54,7 @@ class App extends React.Component {
          <ConnectedRouter history={history}>
            <Switch>
              <Route path="/home" component={Main}/>
+             {getLoggedIn(store.getState()) ? '': <Redirect to="/home" />}
              <Route path="/detail/:bookID" component={BookDetail}/>
              <Route path="/library" render={()=>(
                <Library isLoggedIn={true}/>

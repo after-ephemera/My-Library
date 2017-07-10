@@ -8,7 +8,7 @@ const initialState = {
   currentNotificationIndex: 0,
 };
 
-let notificationIndexByKey = (notifications, key)=>{
+const notificationIndexByKey = (notifications, key)=>{
   return notifications.map((o)=>{
     return o.key;
   }).indexOf(key);
@@ -81,4 +81,4 @@ export const removePersistentNotification = (notification) =>{
       notification,
     })
   }
-}
+};
