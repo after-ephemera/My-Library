@@ -9,6 +9,7 @@ type User {
   preferences: Preferences
   createdAt: Float!
   updatedAt: Float!
+  image: String
 }
 
 extend type Query {
