@@ -3,11 +3,12 @@ import fs from 'fs';
 import path from 'path';
 import mongoPrebuilt from 'mongodb-prebuilt';
 import denodeify from 'denodeify';
+import {API_PORT} from "./server/index";
 
 const dbpath = `${__dirname}/db`;
 
 const {
-  PORT = 3001,
+  PORT = API_PORT,
   MONGO_PORT = parseInt(PORT, 10) + 2,
   MONGO_URL,
 } = process.env;

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// import { Provider } from 'react-redux'
 import store from './store';
 import {ApolloProvider, ApolloClient, createNetworkInterface} from "react-apollo";
+import {SERVER_URL} from "./utils/http/HTTP";
 
 
-const networkInterface = createNetworkInterface({uri: 'http://localhost:3001/api',});
+const networkInterface = createNetworkInterface({uri: `${SERVER_URL}/api`,});
 
 // Afterware to handle errors.
 networkInterface.useAfter([{

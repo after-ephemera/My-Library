@@ -14,11 +14,12 @@ import addModelsToContext from '../model';
 import authenticate from './authenticate';
 
 import { pubsub, subscriptionManager } from './subscriptions';
+export const API_PORT = 3001;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const {
-  PORT = 3001,
+  PORT = API_PORT,
   WS_PORT = parseInt(PORT, 10) + 1,
   MONGO_PORT = parseInt(PORT, 10) + 2,
   MONGO_URL = `mongodb://localhost:${MONGO_PORT}/database`,
