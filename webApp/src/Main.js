@@ -2,7 +2,6 @@ import React from "react";
 import {StyleSheet, css} from "aphrodite";
 import {Observable} from "rxjs";
 import blurImage from "./white-blur.jpg";
-import Library from './Library/Library';
 import {checkLogin} from "./utils/http/HTTP";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
@@ -107,24 +106,26 @@ class Main extends React.Component {
   }
 
   enter = () => {
-    if(checkLogin()){
-      this.setState({
-        entered: !this.state.entered,
-        isLoggedIn: true,
-        loggingIn: false,
-      });
-    } else{
-      console.log('Cant enter');
-      this.setState({
-        entered: !this.state.entered,
-        isLoggedIn: false,
-        loggingIn: false,
-      })
-    }
+    // if(checkLogin()){
+    //   this.setState({
+    //     entered: !this.state.entered,
+    //     isLoggedIn: true,
+    //     loggingIn: false,
+    //   });
+    // } else{
+    //   console.log('Cant enter');
+    //   this.setState({
+    //     entered: !this.state.entered,
+    //     isLoggedIn: false,
+    //     loggingIn: false,
+    //   })
+    // }
 
-    setTimeout(() => {
-      this.setState({hideTitle: true})
-    }, 1000);
+    history.push('/library');
+
+    // setTimeout(() => {
+    //   this.setState({hideTitle: true})
+    // }, 1000);
   };
 
   login(){
@@ -171,7 +172,6 @@ class Main extends React.Component {
            <Route exact path={`${this.match.url}/sign-up`} render={()=>(<SignUp show={true}  onCreate={this.enter} onCancel={this.reset}/>)}/>
          </Switch>
 
-         <Library isLoggedIn={this.state.isLoggedIn}/>
 
        </div>
     )

@@ -6,7 +6,7 @@ import store from './store';
 import {ApolloProvider, ApolloClient, createNetworkInterface} from "react-apollo";
 
 
-const networkInterface = createNetworkInterface({uri: 'http://localhost:3000/api',});
+const networkInterface = createNetworkInterface({uri: 'http://localhost:3001/api',});
 
 // Afterware to handle errors.
 networkInterface.useAfter([{

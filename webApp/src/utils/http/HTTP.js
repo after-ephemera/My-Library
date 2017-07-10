@@ -1,7 +1,7 @@
 import Rx from "rxjs";
 import { history } from '../../store';
 
-const SERVER_URL = `http://localhost:3000`;
+const SERVER_URL = `http://localhost:3001`;
 
 /**
  * Universal http error handler. This function is used to deal with displaying error messages and redirecting

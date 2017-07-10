@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import Main from "./Main";
 import BookDetail from "./BookDetail/BookDetail";
 import NotificationCenter from "./NotificationCenter/NotificationCenter";
@@ -8,7 +8,8 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {history} from './store';
 import { ConnectedRouter } from 'react-router-redux'
-import GqlIntegration from "./Examples/GqlIntegration";
+import Library from "./Library/Library";
+// import GqlIntegration from "./Examples/GqlIntegration";
 
 const colors=['orange','blue','black','silver','whitesmoke','green','pink','red'];
 
@@ -49,11 +50,14 @@ class App extends React.Component {
 
        <main>
          <ConnectedRouter history={history}>
-           <div>
+           <Switch>
              <Route path="/home" component={Main}/>
              <Route path="/detail/:bookID" component={BookDetail}/>
+             <Route path="/library" render={()=>(
+               <Library isLoggedIn={true}/>
+             )} />
               <Redirect to="/home"/> {/* Default route */}
-           </div>
+           </Switch>
          </ConnectedRouter>
        </main>
        {/*<div onClick={this.showNotification}>Click me for a new timeout notification</div>*/}
