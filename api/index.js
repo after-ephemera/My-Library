@@ -7,7 +7,7 @@ import denodeify from 'denodeify';
 const dbpath = `${__dirname}/db`;
 
 const {
-  PORT = 3000,
+  PORT = 3001,
   MONGO_PORT = parseInt(PORT, 10) + 2,
   MONGO_URL,
 } = process.env;

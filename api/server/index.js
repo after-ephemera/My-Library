@@ -18,7 +18,7 @@ import { pubsub, subscriptionManager } from './subscriptions';
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const {
-  PORT = 3000,
+  PORT = 3001,
   WS_PORT = parseInt(PORT, 10) + 1,
   MONGO_PORT = parseInt(PORT, 10) + 2,
   MONGO_URL = `mongodb://localhost:${MONGO_PORT}/database`,
