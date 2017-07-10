@@ -168,7 +168,7 @@ class Main extends React.Component {
 
          <Switch>
            <Route exact path={`${this.match.url}/login`} render={()=>(<Login show={true}  onLogin={this.enter} onCancel={this.reset}/>)}/>
-           <Route exact path={`${this.match.url}/sign-up`} render={()=>(<SignUp show={true}  onCreate={()=>true} onCancel={this.reset}/>)}/>
+           <Route exact path={`${this.match.url}/sign-up`} render={()=>(<SignUp show={true}  onCreate={this.enter} onCancel={this.reset}/>)}/>
          </Switch>
 
          <Library isLoggedIn={this.state.isLoggedIn}/>

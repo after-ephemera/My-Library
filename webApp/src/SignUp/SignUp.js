@@ -1,28 +1,32 @@
-import React from 'react';
+import React from "react";
 import {StyleSheet, css} from "aphrodite";
-import * as HTTP from '../utils/http/HTTP';
-import {AuthService} from '../utils/auth/Auth'
 import {gql, graphql} from "react-apollo";
+import {fadeInFromBelow, fadeOutToBelow} from "../utils/style/styleUtils";
 
 const styles = StyleSheet.create({
   wrapper:{
     display: 'flex',
     justifyContent: 'space-around',
-    transition: 'top .5s ease, opacity .4s ease-in',
     position: 'absolute',
     left: 'calc(50vw - 200px)',
   },
   hide:{
-    top: '96vh',
-    opacity: 0,
+    top: '102vh',
+    animationName: fadeOutToBelow,
+    animationDuration: '.5s',
+    animationIterationCount: '1',
+    // opacity: 0,
   },
   show:{
     top: '26vh',
-    opacity: 1,
+    // opacity: 1,
+    animationName: fadeInFromBelow,
+    animationDuration: '.5s',
+    animationIterationCount: '1',
   },
   login:{
     width: 400,
-    height: 350,
+    height: 390,
     background: 'linear-gradient(#172a3c , whitesmoke)',
     // border: '1px solid #172a3c',
     borderRadius: 8,
@@ -92,6 +96,7 @@ class SignUp extends React.Component{
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleUserCreated = this.handleUserCreated.bind(this);
   }
 
   handleInputChange = (event) => {
@@ -114,9 +119,24 @@ class SignUp extends React.Component{
     }
   };
 
+   handleUserCreated(res){
+     if(res.data.createUser.id){
+       this.props.onCreate();
+     } else{
+       // this.props.addTimeoutNotification(
+       //    {
+       //      id: 0,
+       //      length: 2500,
+       //      message: 'Welcome' + res.data.createUser.firstName,
+       //      color: colors[this.index % colors.length],
+       //      key: this.index,
+       //    });
+     }
+   }
+
   handleSubmit(event){
     // User needs the following:
-    // su: Boolean!
+    //    su: Boolean!
     //    firstName: String!
     //    lastName: String!
     //    email: String!
@@ -128,36 +148,25 @@ class SignUp extends React.Component{
         user: {
           ...this.state,
           su: false,
+          library: [],
         }
       },
       refetchQueries:[
-        {query: gql`query {
+        {
+          query: gql`query {
              users {
                  id
                  firstName
                  su
              }
-         }`}
+          }`
+        }
       ]
-    });
-    // HTTP.login(this.state)
-    //    .catch(err =>{
-    //      console.error('Error: ', err, event);
-    //      alert('Bad email/password.')
-    //      // Show an error message.
-    //    })
-    //    .subscribe(response =>{
-    //      AuthService.token = response.token;
-    //      AuthService.user = response.user;
-    //      console.log('Login submitted: ', 'successfully', this.state);
-    //
-    //      this.props.onLogin();
-    //    });
-    // return false;
+    })
+    .then(this.handleUserCreated);
   }
 
   handleCancel(event){
-    console.log('Handlecancel');
     event.preventDefault();
     event.stopPropagation();
     this.props.onCancel();
@@ -167,7 +176,6 @@ class SignUp extends React.Component{
     return (
        <div className={this.props.show ? css(styles.show, styles.wrapper) : css(styles.hide, styles.wrapper)}>
          <div className={css(styles.login)}>
-           sign up
            <form className={css(styles.centerBox)} onSubmit={(e) => {e.preventDefault();this.handleSubmit();}}>
              <label htmlFor="firstName" className={css(styles.field)}>
                <span className={css(styles.inputLabel)}>first name</span>
