@@ -52,9 +52,7 @@ class App extends React.Component {
            <div>
              <Route path="/home" component={Main}/>
              <Route path="/detail/:bookID" component={BookDetail}/>
-             <Route exact path="/detail" render={() => (
-                <Redirect to="/"/>
-             )}/>
+              <Redirect to="/home"/> {/* Default route */}
            </div>
          </ConnectedRouter>
        </main>
