@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
     transition: 'background .3s ease',
     ':hover':{
       background: '#ffe677',
+    },
+    ':focus':{
+      outline: 'none',
     }
   },
   cancelButton:{

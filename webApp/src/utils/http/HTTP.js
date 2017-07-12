@@ -17,6 +17,8 @@ const handleHttpError = (err)=>{
     console.error('401 - Not authorized');
     // Redirect the user back to the home page.
     history.push('/');
+  } else if(status.toString() === '404'){
+    console.error('404 - Not Found');
   } else{
     console.error('HTTP error with status code ', status);
   }

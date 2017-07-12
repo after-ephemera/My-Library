@@ -21,7 +21,7 @@ const style = (top, n) => {
       position: 'absolute',
       width: '96vw',
       height: '100px',
-      background: n.color,
+      background: n.color || '#FFD363',
       color: 'white',
       zIndex: '2000',
       animationName: appear,
@@ -42,7 +42,7 @@ class Notification extends React.Component{
   render = ()=> (
     <div className={css(style(108 * this.props.index, this.props.notification).notification)}
          onClick={()=>this.props.removePersistentNotification(this.props.notification)}>
-      {JSON.stringify(this.props.notification)}
+      {this.props.notification.message}
     </div>
   )
 }

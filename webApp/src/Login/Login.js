@@ -7,6 +7,7 @@ import {addTimeoutNotification} from "../reducers/notification";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {setToken} from "../reducers/auth";
+import colors from '../utils/style/colors';
 
 const styles = StyleSheet.create({
   wrapper:{
@@ -78,6 +79,9 @@ const styles = StyleSheet.create({
     transition: 'background .3s ease',
     ':hover':{
       background: '#ffe677',
+    },
+    ':focus':{
+      outline: 'none',
     }
   },
   cancelButton:{
@@ -122,7 +126,7 @@ class Login extends React.Component{
        .catch(err =>{
          console.error('Login error: ', err);
          // Show an error message.
-         alert('Bad email/password.');
+         this.props.addTimeoutNotification({id: 0, length: 2000, message: 'Wrong credentials. Please try again.', color: colors.error});
        })
        .subscribe(response =>{
          AuthService.token = response.token;
