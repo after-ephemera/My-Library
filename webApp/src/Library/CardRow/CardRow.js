@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     flexWrap: 'noWrap',
     justifyContent: 'space-around',
-    overflowX: 'scroll'
   }
 });
 

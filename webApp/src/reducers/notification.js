@@ -48,7 +48,7 @@ export default (state = initialState, action) =>{
 }
 
 export const addTimeoutNotification = (notification) =>{
-  // console.log('Dispatching notification!', notification);
+  console.log('Dispatching notification!', notification);
   return dispatch =>{
     dispatch({
       type: SHOW_NOTIFICATION,

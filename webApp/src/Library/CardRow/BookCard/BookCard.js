@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, css} from "aphrodite";
+import {history} from '../../../store';
 
 const bookStyles = StyleSheet.create({
   wrapper: {
@@ -38,17 +39,29 @@ const bookStyles = StyleSheet.create({
   }
 });
 
-let BookCard = (props) => (
-   <div className={css(bookStyles.wrapper)}>
-     <div className={css(bookStyles.imageWrapper)}>
-       <img
-          className={props.book.coverThumb ? css(bookStyles.thumbnail, bookStyles.hoverZoom) : css(bookStyles.thumbnail)}
-          src={props.book.coverThumb || 'http://vignette3.wikia.nocookie.net/vocaloid/images/6/6a/Book_placeholder.png/revision/latest?cb=20140717130031'}
-          alt={props.book.title}/>
-     </div>
-     <span className={css(bookStyles.title, bookStyles.smallText)}>{props.book.title}</span>
-     <div className={css(bookStyles.smallText)}>By {props.book.author}</div>
-   </div>
-);
+class BookCard extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  goToDetail = ()=>{
+    console.log('Clicked gotodetail!');
+    history.push('/detail/232/');
+  };
+
+  render = ()=>(
+    <div className={css(bookStyles.wrapper)} onClick={this.goToDetail}>
+      <div className={css(bookStyles.imageWrapper)}>
+        <img
+        className={this.props.book.coverThumb ? css(bookStyles.thumbnail, bookStyles.hoverZoom) : css(bookStyles.thumbnail)}
+        src={this.props.book.coverThumb || 'http://vignette3.wikia.nocookie.net/vocaloid/images/6/6a/Book_placeholder.png/revision/latest?cb=20140717130031'}
+        alt={this.props.book.title}/>
+      </div>
+      <span className={css(bookStyles.title, bookStyles.smallText)}>{this.props.book.title}</span>
+      <div className={css(bookStyles.smallText)}>By {this.props.book.author}</div>
+    </div>
+  )
+}
+
 
 export default BookCard;
