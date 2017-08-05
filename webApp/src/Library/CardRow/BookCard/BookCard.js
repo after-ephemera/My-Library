@@ -40,9 +40,6 @@ const bookStyles = StyleSheet.create({
 });
 
 class BookCard extends React.Component{
-  constructor(props){
-    super(props);
-  }
 
   goToDetail = ()=>{
     console.log('Clicked gotodetail!');

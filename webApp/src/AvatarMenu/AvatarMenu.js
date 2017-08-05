@@ -111,7 +111,6 @@ class AvatarMenu extends React.Component {
   }
 
   toggleMenu = ()=>{
-    console.log('Toggling');
     this.setState({showMenu: !this.state.showMenu})
   };
 
@@ -135,6 +134,11 @@ class AvatarMenu extends React.Component {
 
               <li onClick={this.toggleMenu} className={css(styles.li)}>
                 <Link className={css(styles.a)} to={'/detail/69045'}>Details</Link>
+              </li>
+
+
+              <li onClick={this.toggleMenu} className={css(styles.li)}>
+                <Link className={css(styles.a)} to={'/'}>Log Out</Link>
               </li>
 
             </ul>

@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import blurImage from "./white-blur.jpg";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
-import AvatarMenu from "./AvatarMenu/AvatarMenu";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {history} from './store';
 import {getLoggedIn} from "./reducers/index";
@@ -150,7 +149,6 @@ class Main extends React.Component {
        <div className={css(styles.fullSize)}>
          {/* If the user is already authenticated, redirect them to their personal home page.*/}
          {getLoggedIn(store.getState()) ? <Redirect to="/library" />: ''}
-         <AvatarMenu/>
 
          <div className={this.state.hideTitle ? css(styles.title, styles.hide) : css(styles.title)}>
 

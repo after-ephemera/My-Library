@@ -3,6 +3,7 @@ import {StyleSheet, css} from "aphrodite";
 import books from './books.data';
 import CardRow from './CardRow/CardRow';
 import {truncateStringByWord} from '../utils/utils';
+import AvatarMenu from "../AvatarMenu/AvatarMenu";
 
 // A simple helper for the randomization of our card rows (so it looks more like real data).
 function shuffleArray(array) {
@@ -60,6 +61,7 @@ class Library extends React.Component {
   render() {
     return (
       <section>
+        <AvatarMenu/>
         <div
           className={this.props.isLoggedIn ?
           css(styles.libraryWrapper, styles.shiftIn) :
