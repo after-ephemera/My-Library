@@ -56,14 +56,14 @@ class BookDetail extends React.Component {
     this.setState({rating: rating});
   }
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       owned: false,
       rating: 0,
       format: 'Hardcover'
     };
-    Rx.Observable.ajax({url: `http://openlibrary.org/search.json?q=enders+in+exile`, crossDomain: true})
+    Rx.Observable.ajax({url: `http://openlibrary.org/search.json?q=` + props.query.split(' ').join('+'), crossDomain: true})
        .map(res => res.response.docs)
        .map(books => {
          console.log(books);
@@ -90,7 +90,7 @@ class BookDetail extends React.Component {
        },
        err=>{
          console.error('My Library Error: ', err);
-       })
+       });
   }
 
   render(){

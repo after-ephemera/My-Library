@@ -11,6 +11,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import Library from "./Library/Library";
 import store from './store';
 import {getLoggedIn} from "./reducers/index";
+import SearchResults from "./SearchResults/SearchResults";
 // import GqlIntegration from "./Examples/GqlIntegration";
 
 const colors=['orange','blue','black','silver','whitesmoke','green','pink','red'];
@@ -55,10 +56,13 @@ class App extends React.Component {
            <Switch>
              <Route path="/home" component={Main}/>
              {getLoggedIn(store.getState()) ? '': <Redirect to="/home" />}
-             <Route path="/detail/:bookID" component={BookDetail}/>
+             <Route path="/detail/:bookID" render={()=>(
+                <BookDetail query="ender shadow"/>
+             )} />
              <Route path="/library" render={()=>(
                <Library isLoggedIn={true}/>
              )} />
+             <Route path="/search/:query" component={SearchResults} />
               <Redirect to="/home"/> {/* Default route */}
            </Switch>
          </ConnectedRouter>

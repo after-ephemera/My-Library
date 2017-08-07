@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, css} from "aphrodite";
 import avatarImage from '../avatar.png';
 import {Link} from "react-router-dom";
+import {history} from '../store';
 
 const styles = StyleSheet.create({
   wrapper:{
@@ -89,15 +90,20 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
   },
-  searchBar:{
+  searchForm:{
     marginRight: 'auto',
     marginLeft: 'auto',
+  },
+  searchBar:{
     fontSize: '1em',
     fontWeight: '200',
     padding: ' 4px 12px',
     borderRadius: 23,
     minWidth: 240,
     position: 'relative',
+    ':focus':{
+      outline: 'none'
+    }
   }
 });
 
@@ -106,12 +112,24 @@ class AvatarMenu extends React.Component {
   constructor(){
     super();
     this.state = {
-      showMenu: false
-    }
+      showMenu: false,
+      searchText: '',
+    };
+    this.onSearch = this.onSearch.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   toggleMenu = ()=>{
     this.setState({showMenu: !this.state.showMenu})
+  };
+
+  onSearch = (e)=>{
+    e.preventDefault();
+    history.push('/search/' + encodeURIComponent(this.state.searchText.split(' ').join('+')));
+  };
+
+  onInputChange = (e)=>{
+    this.setState({searchText: e.target.value});
   };
 
   render(){
@@ -123,8 +141,13 @@ class AvatarMenu extends React.Component {
         <div className={this.state.showMenu ? css(styles.showMenu): css(styles.hideMenu)}>
           <div className={css(styles.popoverArrow)} />
             <ul className={css(styles.menuList)}>
-
-              <input type="text" placeholder="search by title, author, etc." className={css(styles.searchBar)} />
+              <form className={css(styles.searchForm)}
+                    onSubmit={this.onSearch}>
+              <input type="text" placeholder="search by title, author, etc."
+                     value={this.state.searchText}
+                     onChange={this.onInputChange}
+                     className={css(styles.searchBar)}/>
+              </form>
 
               <li className={css(styles.hrWrapper)}><hr className={css(styles.hr)} /></li>
 
