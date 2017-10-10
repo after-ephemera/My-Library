@@ -19,7 +19,7 @@ let CardRow = (props) => (
    <section>
      <h1>{props.title}</h1>
      <div className={css(styles.bookRow)}>
-       {props.books.map(book => <BookCard key={book.key} book={book}/>)}
+       {props.books.map((book, index) => <BookCard key={index} book={book}/>)}
      </div>
    </section>
 );

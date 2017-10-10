@@ -1,5 +1,6 @@
 import React from 'react';
 import Rx from "rxjs";
+import * as _ from 'lodash';
 import CardRow from "../Library/CardRow/CardRow";
 
 class SearchResults extends React.Component {
@@ -9,7 +10,9 @@ class SearchResults extends React.Component {
     this.state = {
       query: decodeURIComponent(props.match.params.query),
       results: [],
+      chunks: [],
     };
+    this.arrangeResults = this.arrangeResults.bind(this);
     Rx.Observable.ajax({url: `http://openlibrary.org/search.json?q=` + this.state.query, crossDomain: true})
        .map(res => res.response.docs)
        .map(books => {
@@ -26,14 +29,17 @@ class SearchResults extends React.Component {
            }
          });
        })
-       .flatMap(books =>{
+       .map(books =>{
          this.setState({results: books});
-         // Get google books result for description.
-         return Rx.Observable.ajax({url: `https://www.googleapis.com/books/v1/volumes?q=isbn:${books[0].isbn[0]}`, crossDomain: true});
+         return books.map((book, index) =>{
+           book.key = index;
+           return book;
+         });
        })
        .subscribe(books => {
             console.log(books);
-            this.setState({description: books.response.items[0].volumeInfo.description});
+            // this.setState({description: books.response.items[0].volumeInfo.description});
+            this.arrangeResults(this.state.results);
           },
           err=>{
             console.error('My Library Error: ', err);
@@ -42,13 +48,13 @@ class SearchResults extends React.Component {
 
   arrangeResults = (books) =>{
     let numRows = Math.ceil(books.length / 5) ;
-    // [...Array(numRows).keys()]
-
+    //Divide the results list into rows of 5.
+    this.setState({chunks: _.chunk(books, 5)});
   };
 
   render = ()=> {
     return (<section>
-      {<CardRow books={row}/>}
+      {this.state.chunks.map(chunk => <CardRow books={chunk} />)}
     </section>)
   };
 }
