@@ -62,7 +62,12 @@ class App extends React.Component {
              <Route path="/library" render={()=>(
                <Library isLoggedIn={true}/>
              )} />
-             <Route path="/search/:query" component={SearchResults} />
+             <Route path="/search/:query" render={(props)=>{
+               console.log("rerendering search " + props.match.params.query);
+                return (
+                  <SearchResults query={props.match.params.query}/>
+                )
+             }} />
               <Redirect to="/home"/> {/* Default route */}
            </Switch>
          </ConnectedRouter>

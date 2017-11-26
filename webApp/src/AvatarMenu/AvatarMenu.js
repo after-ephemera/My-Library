@@ -117,6 +117,7 @@ class AvatarMenu extends React.Component {
     };
     this.onSearch = this.onSearch.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   toggleMenu = ()=>{
@@ -124,8 +125,13 @@ class AvatarMenu extends React.Component {
   };
 
   onSearch = (e)=>{
+    this.toggleMenu()
     e.preventDefault();
+    console.log("History: ", history.location.pathname.split('/')[1]);
     history.push('/search/' + encodeURIComponent(this.state.searchText.split(' ').join('+')));
+    if(this.props.searchCallback){
+      this.props.searchCallback(this.state.searchText);
+    }
   };
 
   onInputChange = (e)=>{
